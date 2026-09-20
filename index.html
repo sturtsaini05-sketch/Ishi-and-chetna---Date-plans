@@ -149,6 +149,16 @@
   .pages i{width:7px;height:7px;border-radius:50%;background:var(--line)}
   .pages i.on{background:var(--gold)}
   .sparkle{color:var(--gold)}
+  .polaroid{
+    margin:20px 0 0;padding:10px 10px 14px;background:#fbf5ef;border-radius:4px;
+    transform:rotate(-1.6deg);box-shadow:0 14px 34px rgba(0,0,0,.45);
+    max-width:100%;
+  }
+  .polaroid img{display:block;width:100%;height:auto;border-radius:2px}
+  .polaroid figcaption{
+    font-family:var(--display);font-style:italic;font-size:17px;color:#6d4a5e;
+    text-align:center;margin-top:10px;line-height:1.3;
+  }
 
   @media (prefers-reduced-motion:reduce){
     .screen{animation:none}
@@ -293,6 +303,8 @@
   const pages = [
     `<p class="drop">Once upon a time, in a meadow where the clouds were made of fairy floss, there lived a little unicorn named <em>${NAME}</em>.</p>`,
     `<p>She wasn't the tallest unicorn, or the loudest. But whenever she laughed, the flowers turned to look, and the rainbows came out early just to see her.</p>`,
+    `<p>Even the shyest creatures of the forest would wander over just to sit beside her. The deer knew. <span class="sparkle">(Photographic evidence below.)</span></p>
+     <figure class="polaroid"><img src="chetna-deer.jpg" alt="Chetna sitting on a stone wall, gently patting a deer" width="1000" height="838"><figcaption>Rare sighting: one unicorn, one very lucky deer</figcaption></figure>`,
     `<p>The other unicorns tried to work out her secret. Was it the shimmer in her mane? The glitter she left on everything she touched? The way her nose scrunched when she smiled? <span class="sparkle">(It was definitely the nose scrunch.)</span></p>`,
     `<p>One evening a boy wandered into the meadow, took one look at her, and forgot every word he knew.</p>`,
     `<p>He's been looking for the right words ever since. He finally found a few — <em>they're on the next page.</em></p>`,
