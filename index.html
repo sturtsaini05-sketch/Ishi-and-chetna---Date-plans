@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a1020">
+<meta property="og:title" content="Chetna, I have a few questions…">
+<meta property="og:description" content="Five very important questions. There's a prize at the end.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦄</text></svg>">
+<title>Saturday, With Me?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ink:#1a1020;        /* late-evening plum */
+    --ink-2:#26182e;
+    --line:#3d2a47;
+    --text:#f6ece4;
+    --muted:#bba7b4;
+    --rose:#ff8fa3;
+    --gold:#f3c677;
+    --display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+    --body:"Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  html,body{height:100%}
+  body{
+    background:
+      radial-gradient(120% 70% at 50% 110%, #4a2340 0%, transparent 60%),
+      radial-gradient(80% 50% at 85% -10%, #2f1d45 0%, transparent 60%),
+      var(--ink);
+    background-attachment:fixed;
+    color:var(--text);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.55;
+    padding-inline:16px;
+    overflow-x:hidden;
+  }
+  #sky{position:fixed;inset:0;pointer-events:none;z-index:0}
+  main{
+    position:relative;z-index:1;
+    max-width:540px;margin:0 auto;
+    min-height:100%;
+    display:flex;flex-direction:column;justify-content:center;
+    padding-block:48px;
+  }
+  .progress{display:flex;gap:6px;margin-bottom:28px}
+  .progress span{flex:1;height:3px;border-radius:2px;background:var(--line);transition:background .4s}
+  .progress span.on{background:var(--rose)}
+  .eyebrow{
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin:0 0 12px;
+  }
+  h1,h2{
+    font-family:var(--display);font-weight:400;
+    line-height:1.05;margin:0 0 16px;text-wrap:balance;
+  }
+  h1{font-size:clamp(44px,11vw,72px)}
+  h2{font-size:clamp(34px,8vw,48px)}
+  h1 em,h2 em{color:var(--rose)}
+  p{margin:0 0 16px;color:var(--muted);max-width:60ch}
+  .screen{animation:rise .6s cubic-bezier(.2,.7,.2,1)}
+  @keyframes rise{from{opacity:.001;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  .options{display:grid;gap:10px;margin-top:20px}
+  .opt{
+    appearance:none;text-align:left;cursor:pointer;
+    font:inherit;color:var(--text);
+    background:var(--ink-2);
+    border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    transition:border-color .2s, transform .15s, background .2s;
+  }
+  .opt small{color:var(--muted);font-size:13px}
+  .opt:hover{border-color:var(--rose);transform:translateY(-1px)}
+  .opt:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .opt.picked{background:#3a1f35;border-color:var(--rose)}
+
+  .reaction{
+    min-height:1.6em;margin-top:18px;
+    font-family:var(--display);font-style:italic;font-size:22px;color:var(--gold);
+  }
+
+  .btn{
+    appearance:none;cursor:pointer;font:inherit;font-weight:600;
+    border-radius:999px;padding:14px 28px;border:1px solid transparent;
+    transition:transform .15s, background .2s;
+  }
+  .btn.primary{background:var(--rose);color:#2a0f1c}
+  .btn.primary:hover{transform:scale(1.03)}
+  .btn.ghost{background:transparent;border-color:var(--line);color:var(--muted)}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:24px}
+
+  /* slider */
+  .meter{margin-top:24px}
+  .meter output{
+    display:block;font-family:var(--display);font-size:88px;line-height:1;color:var(--rose);
+    font-variant-numeric:tabular-nums;
+  }
+  input[type=range]{width:100%;accent-color:var(--rose);margin-top:12px}
+  .scale{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+
+  /* the ask */
+  .ask-zone{position:relative;min-height:140px;margin-top:28px}
+  #yes{font-size:18px;transition:transform .25s}
+  #no{position:absolute;left:150px;top:6px;transition:left .25s, top .25s}
+
+  /* ticket */
+  .ticket{
+    margin-top:24px;
+    background:var(--text);color:#2a1628;
+    border-radius:18px;overflow:hidden;
+  }
+  .ticket-head{
+    padding:20px 22px;
+    border-bottom:2px dashed #d9c3c9;
+    display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;
+  }
+  .ticket-head .date{font-family:var(--display);font-size:34px;line-height:1}
+  .ticket-head .who{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8a5a73;font-weight:600}
+  .stops{list-style:none;margin:0;padding:8px 22px 18px}
+  .stops li{
+    display:grid;grid-template-columns:64px 1fr;gap:14px;
+    padding:14px 0;border-bottom:1px solid #ecdde0;
+  }
+  .stops li:last-child{border-bottom:0}
+  .stops time{font-variant-numeric:tabular-nums;font-weight:600;color:#b0476a;font-size:14px;padding-top:3px}
+  .stops b{font-family:var(--display);font-weight:400;font-size:24px;display:block;line-height:1.15}
+  .stops span{color:#6d5563;font-size:14px}
+  .fine{font-size:13px;color:var(--muted);margin-top:18px}
+
+  *{box-sizing:border-box}
+  body{margin:0}
+
+  /* storybook */
+  .story{
+    margin-top:8px;
+    font-family:var(--display);font-size:clamp(20px,5vw,23px);line-height:1.45;
+    color:var(--text);min-height:9em;
+  }
+  .story p{color:var(--text);font-size:inherit;margin:0}
+  .story .drop::first-letter{
+    float:left;font-size:3.4em;line-height:.8;padding:6px 10px 0 0;color:var(--gold);
+  }
+  .story em{color:var(--rose)}
+  .pages{display:flex;gap:6px;margin-top:22px}
+  .pages i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+  .pages i.on{background:var(--gold)}
+  .sparkle{color:var(--gold)}
+
+  @media (prefers-reduced-motion:reduce){
+    .screen{animation:none}
+    *{transition:none!important}
+  }
+</style>
+
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<main id="app" aria-live="polite"></main>
+
+<script>
+(() => {
+  const app = document.getElementById('app');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const answers = {};
+  const TOTAL = 5;
+  const NAME = 'Chetna';
+
+  // Answers are sent to Inder as push notifications (ntfy.sh topic below)
+  const TOPIC = 'chetna-date-ba0f8aef49f1';
+  const notify = (title, msg, tags='sparkles') => {
+    try {
+      fetch('https://ntfy.sh/', {
+        method:'POST', keepalive:true,
+        body: JSON.stringify({ topic: TOPIC, title, message: msg, tags: tags.split(',') })
+      }).catch(()=>{});
+    } catch(e){}
+  };
+  notify('Chetna opened the page', 'She is reading the questions right now 👀', 'eyes');
+
+  // The date: Saturday 26 September 2026
+  const sat = new Date(2026, 8, 26);
+  const satLong = sat.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long'});
+  const satShort = sat.toLocaleDateString('en-AU',{day:'numeric',month:'short'});
+
+  const progress = n => `<div class="progress">${Array.from({length:TOTAL},(_,i)=>`<span class="${i<n?'on':''}"></span>`).join('')}</div>`;
+
+  const questions = [
+    {
+      key:'vibe', eyebrow:'Question one',
+      q:'Your ideal Saturday night <em>feels like…</em>',
+      opts:[
+        ['Glam and a little chaotic','dress up, go out, see where it lands', 'Oh, I can work with that.'],
+        ['Cosy and slow','good food, long chats', 'Noted. Soft-launch energy.'],
+        ['A tiny adventure','somewhere we\'ve never been', 'Say less. Adventure it is.'],
+      ]
+    },
+    {
+      key:'drink', eyebrow:'Question two',
+      q:'First drink of the night?',
+      opts:[
+        ['Espresso martini','for the stamina', 'A woman who plans ahead.'],
+        ['Aperol spritz','it\'s basically a sunset in a glass', 'Classy. Obviously.'],
+        ['Margarita','salt rim, no notes', 'Spicy choice. I respect it.'],
+        ['Surprise me','bartender\'s pick', 'Trusting me already? Cute.'],
+      ]
+    },
+    { key:'cute', type:'slider', eyebrow:'Question three' },
+    {
+      key:'food', eyebrow:'Question four',
+      q:'Dinner craving?',
+      opts:[
+        ['Italian','pasta, candles, the whole thing', 'Carbs and candlelight. Perfect.'],
+        ['Japanese','sushi, izakaya, sake', 'Chopstick skills: to be tested.'],
+        ['Something fancy','let\'s be a bit extra', 'You deserve extra. Always.'],
+        ['You pick','I trust you', 'Challenge accepted.'],
+      ]
+    },
+    {
+      key:'end', eyebrow:'Last one, promise',
+      q:'Best way to end a night?',
+      opts:[
+        ['A slow walk','hand in hand, no rush', 'Just you, me, and the city.'],
+        ['A view point','city lights from up high', 'Front-row seats to the skyline.'],
+      ]
+    },
+  ];
+
+  function intro(){
+    app.innerHTML = `<section class="screen">
+      <p class="eyebrow">For Chetna, specifically</p>
+      <h1>Hey ${NAME}. <em>I have a few questions.</em></h1>
+      <p>Five of them. Very important. Answer honestly — there is a prize at the end.</p>
+      <div class="row"><button class="btn primary" id="go">Okay, I'm curious</button></div>
+    </section>`;
+    document.getElementById('go').onclick = () => ask(0);
+  }
+
+  function ask(i){
+    const q = questions[i];
+    if (!q) return story(0);
+    if (q.type === 'slider') return slider(i);
+    app.innerHTML = `<section class="screen">
+      ${progress(i)}
+      <p class="eyebrow">${q.eyebrow}</p>
+      <h2>${q.q}</h2>
+      <div class="options">
+        ${q.opts.map((o,j)=>`<button class="opt" data-j="${j}"><span>${o[0]}</span><small>${o[1]}</small></button>`).join('')}
+      </div>
+      <div class="reaction" id="react"></div>
+    </section>`;
+    app.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+      const o = q.opts[+b.dataset.j];
+      answers[q.key] = o[0];
+      notify(`${q.eyebrow}: ${o[0]}`, q.q.replace(/<[^>]+>/g,'') + ' → ' + o[0], 'speech_balloon');
+      app.querySelectorAll('.opt').forEach(x => { x.classList.toggle('picked', x===b); x.disabled = true; });
+      document.getElementById('react').textContent = o[2];
+      setTimeout(() => ask(i+1), 1300);
+    });
+  }
+
+  function slider(i){
+    const lines = {8:'Hmm. Try again.',9:'Getting warmer…',10:'Correct answer. Moving on.'};
+    app.innerHTML = `<section class="screen">
+      ${progress(i)}
+      <p class="eyebrow">Question three</p>
+      <h2>On a scale of 1 to 10, <em>how cute am I?</em></h2>
+      <p>Take your time. Be fair.</p>
+      <div class="meter">
+        <output id="val">8</output>
+        <input type="range" id="cute" min="8" max="10" step="1" value="8" aria-label="How cute am I">
+        <div class="scale"><span>8 (the minimum, sorry)</span><span>10</span></div>
+      </div>
+      <div class="reaction" id="react">${lines[8]}</div>
+      <div class="row"><button class="btn primary" id="next" disabled style="opacity:.4">Lock it in</button></div>
+    </section>`;
+    const r = document.getElementById('cute'), v = document.getElementById('val'),
+          re = document.getElementById('react'), nx = document.getElementById('next');
+    r.oninput = () => {
+      v.textContent = r.value; re.textContent = lines[r.value];
+      const ok = r.value === '10'; nx.disabled = !ok; nx.style.opacity = ok ? 1 : .4;
+    };
+    nx.onclick = () => {
+      answers.cute = 10;
+      notify('Question three: 10/10', 'She rated you 10 out of 10 cute (it only went from 8, but still).', 'star');
+      ask(i+1);
+    };
+  }
+
+  const pages = [
+    `<p class="drop">Once upon a time, in a meadow where the clouds were made of fairy floss, there lived a little unicorn named <em>${NAME}</em>.</p>`,
+    `<p>She wasn't the tallest unicorn, or the loudest. But whenever she laughed, the flowers turned to look, and the rainbows came out early just to see her.</p>`,
+    `<p>The other unicorns tried to work out her secret. Was it the shimmer in her mane? The glitter she left on everything she touched? The way her nose scrunched when she smiled? <span class="sparkle">(It was definitely the nose scrunch.)</span></p>`,
+    `<p>One evening a boy wandered into the meadow, took one look at her, and forgot every word he knew.</p>`,
+    `<p>He's been looking for the right words ever since. He finally found a few — <em>they're on the next page.</em></p>`,
+  ];
+  function story(p){
+    app.innerHTML = `<section class="screen">
+      <p class="eyebrow">Before the big question · a very short story</p>
+      <h2>The littlest <em>unicorn</em></h2>
+      <div class="story">${pages[p]}</div>
+      <div class="pages">${pages.map((_,k)=>`<i class="${k<=p?'on':''}"></i>`).join('')}</div>
+      <div class="row"><button class="btn primary" id="turn">${p < pages.length-1 ? 'Turn the page' : 'Show me the words'}</button></div>
+    </section>`;
+    document.getElementById('turn').onclick = () => p < pages.length-1 ? story(p+1) : theAsk();
+  }
+
+  function theAsk(){
+    const noLines = ['No','Are you sure?','Really sure?','Think again','Wrong button','Nice try','Still no?','Just press yes'];
+    let tries = 0, scale = 1;
+    app.innerHTML = `<section class="screen">
+      ${progress(TOTAL)}
+      <p class="eyebrow">The real question</p>
+      <h1>${NAME}, will you go out with me <em>this ${satLong}?</em></h1>
+      <p>Bar hopping, a proper dinner, and ${answers.end === 'A view point' ? 'the city lights from a view point' : 'a slow walk'} to finish. You already helped plan it.</p>
+      <div class="ask-zone" id="zone">
+        <button class="btn primary" id="yes">Yes</button>
+        <button class="btn ghost" id="no">No</button>
+      </div>
+    </section>`;
+    const zone = document.getElementById('zone'), no = document.getElementById('no'), yes = document.getElementById('yes');
+    const dodge = e => {
+      e && e.preventDefault();
+      tries++;
+      no.textContent = noLines[Math.min(tries, noLines.length-1)];
+      const w = zone.clientWidth - no.offsetWidth, h = zone.clientHeight - no.offsetHeight;
+      no.style.left = Math.max(0, Math.random()*w) + 'px';
+      no.style.top = Math.max(60, Math.random()*h) + 'px';
+      scale = Math.min(scale + .12, 1.8);
+      yes.style.transform = `scale(${scale})`; yes.style.transformOrigin = 'left center';
+      if (tries >= 8) no.hidden = true;
+      if (tries === 1 || tries === 5) notify('She tried to press No 😅', `Attempt ${tries}. The button ran away.`, 'running');
+    };
+    no.addEventListener('mouseenter', dodge);
+    no.addEventListener('click', dodge);
+    no.addEventListener('touchstart', dodge, {passive:false});
+    yes.onclick = yay;
+  }
+
+  function yay(){
+    burst();
+    notify('SHE SAID YES 💖',
+      `Chetna said YES to ${satLong}!\n\nVibe: ${answers.vibe}\nFirst drink: ${answers.drink}\nCute rating: 10/10\nDinner: ${answers.food}\nEnd of night: ${answers.end}`,
+      'tada,heart');
+    const endStop = answers.end === 'A view point'
+      ? ['A view point','City lights from up high — I\'ll bring a jacket for you.']
+      : ['A slow walk','Hand in hand, no rush, wherever the night goes.'];
+    const food = answers.food === 'You pick' ? 'somewhere I\'ve picked (you\'ll love it)'
+               : answers.food === 'Something fancy' ? 'somewhere a little bit extra'
+               : (answers.food || 'somewhere great').toLowerCase() === 'italian' ? 'Italian, candles included'
+               : answers.food === 'Japanese' ? 'Japanese — sushi and sake' : 'somewhere great';
+    app.innerHTML = `<section class="screen">
+      <p class="eyebrow">It's a date</p>
+      <h1>Best answer <em>ever.</em></h1>
+      <p>Here's the plan. Screenshot it, it's official now.</p>
+      <div class="ticket">
+        <div class="ticket-head">
+          <div><div class="who">Admit two · Chetna &amp; Inder</div><div class="date">${satLong}</div></div>
+          <div class="who">${satShort} · Evening</div>
+        </div>
+        <ol class="stops">
+          <li><time>6:30pm</time><div><b>Bar hopping</b><span>Starting with ${answers.drink === 'Surprise me' ? 'a surprise drink, bartender\'s pick' : 'your ' + (answers.drink || 'favourite').toLowerCase()}.</span></div></li>
+          <li><time>8:30pm</time><div><b>Dinner</b><span>A nice table at ${food}.</span></div></li>
+          <li><time>10:30pm</time><div><b>${endStop[0]}</b><span>${endStop[1]}</span></div></li>
+        </ol>
+      </div>
+      <p class="fine">Dress code: whatever makes you feel gorgeous (so, anything). Times are flexible — you're not.</p>
+      <div class="row"><button class="btn ghost" id="again">Celebrate again</button></div>
+    </section>`;
+    document.getElementById('again').onclick = burst;
+  }
+
+  // ---- ambient stars + heart burst ----
+  const c = document.getElementById('sky'), x = c.getContext('2d');
+  let W, H, stars = [], hearts = [];
+  const fit = () => {
+    const dpr = Math.min(devicePixelRatio||1, 2);
+    W = innerWidth; H = innerHeight; c.width = W*dpr; c.height = H*dpr;
+    x.setTransform(dpr,0,0,dpr,0,0);
+    stars = Array.from({length: Math.round(W*H/9000)}, () => ({x:Math.random()*W, y:Math.random()*H*.8, r:Math.random()*1.2+.2, p:Math.random()*6}));
+  };
+  fit(); addEventListener('resize', fit);
+
+  function heart(px,py,s,col,a){
+    x.save(); x.globalAlpha=a; x.translate(px,py); x.scale(s,s); x.fillStyle=col;
+    x.beginPath(); x.moveTo(0,3);
+    x.bezierCurveTo(-5,-2,-10,4,0,11); x.bezierCurveTo(10,4,5,-2,0,3);
+    x.fill(); x.restore();
+  }
+  function burst(){
+    const cols = ['#ff8fa3','#f3c677','#ffc2cf','#f6ece4'];
+    const n = reduce ? 20 : 90;
+    for (let i=0;i<n;i++) hearts.push({
+      x:W/2, y:H*.55, vx:(Math.random()-.5)*9, vy:-Math.random()*10-4,
+      s:Math.random()*1.4+.8, c:cols[i%cols.length], life:1
+    });
+  }
+  let t = 0;
+  (function loop(){
+    t += .016; x.clearRect(0,0,W,H);
+    for (const s of stars){
+      x.globalAlpha = reduce ? .6 : .35 + .35*Math.sin(t*1.5+s.p);
+      x.fillStyle = '#f6ece4'; x.beginPath(); x.arc(s.x,s.y,s.r,0,7); x.fill();
+    }
+    x.globalAlpha = 1;
+    hearts = hearts.filter(h => h.life > 0);
+    for (const h of hearts){
+      h.x += h.vx; h.y += h.vy; h.vy += .22; h.vx *= .99; h.life -= .008;
+      heart(h.x,h.y,h.s,h.c,Math.max(h.life,0));
+    }
+    requestAnimationFrame(loop);
+  })();
+
+  intro();
+})();
+</script>
+
+</body>
+</html>
