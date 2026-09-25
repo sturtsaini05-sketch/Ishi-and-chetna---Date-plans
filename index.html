@@ -190,23 +190,52 @@
     border:1px solid var(--line);border-radius:16px;touch-action:none;cursor:grab;
   }
 
-  /* fairytales */
-  .tale{
-    margin-top:18px;font-family:var(--display);font-size:clamp(19px,4.8vw,23px);
-    line-height:1.45;color:var(--text);
+  /* the song */
+  .song{
+    margin-top:24px;padding:16px;border:1px solid var(--line);border-radius:16px;
+    background:linear-gradient(180deg,#2b1a33 0%,#221530 100%);
   }
-  .tale::first-letter{font-size:2.1em;line-height:.9;color:var(--gold);float:left;padding:7px 8px 0 0}
-  .pages{display:flex;gap:6px;margin-top:20px}
+  .video{
+    position:relative;aspect-ratio:16/9;width:100%;max-width:100%;
+    border-radius:12px;overflow:hidden;background:#000;
+  }
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* fairytales — photo and story share one screen, no scrolling */
+  main:has(.tale-screen){padding-block:22px}
+  .tale-screen{display:flex;flex-direction:column;gap:2px}
+  .tale-screen h2{font-size:clamp(26px,6.4vw,38px);margin-bottom:8px}
+  .tale-screen .polaroid{
+    margin:6px auto 0;width:fit-content;max-width:100%;
+    padding:8px 8px 10px;
+  }
+  .tale-screen .polaroid img{
+    max-height:44vh;width:auto;max-width:100%;object-fit:contain;margin:0 auto;
+  }
+  .tale-screen .polaroid figcaption{font-size:15px;margin-top:7px}
+  .tale-screen .row{margin-top:14px}
+  .tale{
+    margin-top:14px;font-family:var(--display);font-size:clamp(17px,4.3vw,22px);
+    line-height:1.4;color:var(--text);
+  }
+  @media (min-width:760px){
+    .tale-screen .polaroid img{max-height:52vh}
+  }
+  @media (max-height:700px){
+    .tale-screen .polaroid img{max-height:38vh}
+    .tale{font-size:16px;line-height:1.35}
+  }
+  .tale::first-letter{font-size:2em;line-height:.9;color:var(--gold);float:left;padding:6px 8px 0 0}
+  .pages{display:flex;gap:6px;margin-top:14px}
   .pages i{width:7px;height:7px;border-radius:50%;background:var(--line)}
   .pages i.on{background:var(--gold)}
-  .polaroid img{max-height:62vh;object-fit:cover;object-position:top center}
 
   /* polaroid */
   .polaroid{
     margin:22px 0 0;padding:10px 10px 14px;background:#fbf5ef;border-radius:4px;
     transform:rotate(-1.6deg);box-shadow:0 14px 34px rgba(0,0,0,.45);max-width:100%;
   }
-  .polaroid img{display:block;width:100%;height:auto;border-radius:2px}
+  .polaroid img{display:block;width:100%;height:auto;object-fit:contain;border-radius:2px}
   .polaroid figcaption{
     font-family:var(--display);font-style:italic;font-size:17px;color:#6d4a5e;
     text-align:center;margin-top:10px;line-height:1.3;
@@ -382,8 +411,11 @@
   ];
   const MOOD = ['warming up','a little bit melting','smiling, I saw it','no going back now','see you at 6:30'];
 
+  const CREATURES = ['butterfly','fairy','angel','unicorn','fairy'];
+
   function lines(i){
     const [text, aside] = LINES[i];
+    flyBy(CREATURES[i % CREATURES.length]);
     const pct = Math.round(((i+1)/LINES.length)*100);
     const last = i === LINES.length-1;
     app.innerHTML = `<section class="screen">
@@ -425,7 +457,8 @@
 
   function tales(i){
     const tl = TALES[i], last = i === TALES.length-1;
-    app.innerHTML = `<section class="screen">
+    flyBy(CREATURES[(i + 2) % CREATURES.length]);
+    app.innerHTML = `<section class="screen tale-screen">
       <p class="eyebrow">Five true fairytales · ${i+1} of ${TALES.length}</p>
       <h2>${tl.title}</h2>
       <figure class="polaroid">
@@ -711,8 +744,8 @@
       <p>You're ${mood.toLowerCase()}, I'm somewhere past that. Tomorrow: one surprise drink, one table I've been quietly smug about, and the whole city lit up underneath us.</p>
       <div class="clock" id="clock"></div>
       <figure class="polaroid">
-        <img src="chetna-deer.jpg" alt="Chetna sitting on a stone wall, gently patting a deer" width="1000" height="838">
-        <figcaption>Still the best photo ever taken of anyone</figcaption>
+        <img src="tale-bridge.jpg" alt="Chetna in a red floral dress on a wooden bridge by a lake">
+        <figcaption>This one's my favourite. That's the whole caption.</figcaption>
       </figure>
       <div class="ask-box">
         <label for="song"><b>One job for you:</b> what's playing in the car on the way?</label>
@@ -721,6 +754,16 @@
           <button class="btn primary" id="sendsong">Send</button>
         </div>
         <p class="fine" id="songdone" hidden>Got it. It's going on the playlist tonight.</p>
+      </div>
+      <div class="song">
+        <p class="eyebrow" style="margin-bottom:8px">And one last thing · press play</p>
+        <div class="video">
+          <iframe src="https://www.youtube-nocookie.com/embed/bP8ATWCvqzw?rel=0"
+            title="Arz Kiya Hai — Anuv Jain × Lost Stories, Coke Studio Bharat"
+            allow="accelerometer; encrypted-media; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="fine" style="margin-top:10px"><b style="color:var(--text)">Arz Kiya Hai</b> — Anuv Jain × Lost Stories, Coke Studio Bharat. Consider this the arz. The rest of it I'll say on Saturday.</p>
       </div>
       <p class="fine">Bring nothing else. I've got the rest.</p>
       <div class="row">
@@ -769,6 +812,83 @@
   fit(); addEventListener('resize', fit);
 
   function setSky(mode){ skyMode = mode; buildSky(); }
+
+  // ---- a couple of magical things fly across on every chapter ----
+  let fliers = [], dust = [];
+  function flyBy(kind){
+    const dir = Math.random() < .5 ? 1 : -1;
+    const baseY = H*.18 + Math.random()*H*.35;
+    const speed = (1.5 + Math.random()*.7) * dir;
+    for (let i = 0; i < 2; i++){          // always a pair
+      fliers.push({
+        kind, dir,
+        x: dir > 0 ? -70 - i*54 : W + 70 + i*54,
+        y: baseY + i*26,
+        vx: speed,
+        amp: 16 + Math.random()*14,
+        ph: Math.random()*6 + i*.7,
+        s: (kind === 'unicorn' ? .8 : 1) * (.9 + Math.random()*.35),
+        t: 0
+      });
+    }
+  }
+
+  function wing(flap, side){        // one wing pair frame, side = 1 | -1
+    x.save(); x.scale(side, 1);
+    x.beginPath();
+    x.ellipse(9, -4, 10 * flap, 8, -.5, 0, 7);
+    x.fill();
+    x.beginPath();
+    x.ellipse(7, 5, 7.5 * flap, 6, .4, 0, 7);
+    x.fill();
+    x.restore();
+  }
+
+  function drawFlier(f){
+    const flap = .35 + Math.abs(Math.sin(f.t * 9)) * .75;
+    x.save();
+    x.translate(f.x, f.y);
+    x.scale(f.s * (f.dir > 0 ? 1 : -1), f.s);
+
+    if (f.kind === 'butterfly'){
+      x.fillStyle = 'rgba(255,143,163,.85)'; wing(flap, 1);
+      x.fillStyle = 'rgba(243,198,119,.8)'; wing(flap, -1);
+      x.strokeStyle = '#f6ece4'; x.lineWidth = 1.6; x.lineCap = 'round';
+      x.beginPath(); x.moveTo(0, -7); x.lineTo(0, 8); x.stroke();
+      x.beginPath(); x.moveTo(0, -7); x.quadraticCurveTo(4, -13, 7, -12); x.stroke();
+      x.beginPath(); x.moveTo(0, -7); x.quadraticCurveTo(-4, -13, -7, -12); x.stroke();
+    } else if (f.kind === 'fairy'){
+      x.fillStyle = 'rgba(214,236,255,.55)'; wing(flap, 1); wing(flap, -1);
+      x.fillStyle = '#f3c677';
+      x.beginPath(); x.arc(0, 0, 4.2, 0, 7); x.fill();
+      x.globalAlpha = .35; x.beginPath(); x.arc(0, 0, 9, 0, 7); x.fill(); x.globalAlpha = 1;
+      x.strokeStyle = 'rgba(246,236,228,.8)'; x.lineWidth = 1.4;
+      x.beginPath(); x.moveTo(0, 4); x.lineTo(-1, 11); x.stroke();
+    } else if (f.kind === 'angel'){
+      x.fillStyle = 'rgba(246,236,228,.9)'; wing(flap, 1); wing(flap, -1);
+      x.fillStyle = '#fbf3ec';
+      x.beginPath(); x.ellipse(0, 4, 5, 9, 0, 0, 7); x.fill();      // gown
+      x.beginPath(); x.arc(0, -8, 4, 0, 7); x.fill();                // head
+      x.strokeStyle = '#f3c677'; x.lineWidth = 1.8;                  // halo
+      x.beginPath(); x.ellipse(0, -14, 5.5, 2, 0, 0, 7); x.stroke();
+    } else {                                                          // unicorn
+      x.fillStyle = 'rgba(214,236,255,.5)'; wing(flap * 1.2, 1);
+      x.fillStyle = '#fbf3ec';
+      x.beginPath(); x.ellipse(0, 0, 14, 8, 0, 0, 7); x.fill();       // body
+      x.strokeStyle = '#fbf3ec'; x.lineWidth = 3.4; x.lineCap = 'round';
+      [-7, -1, 5, 9].forEach((lx, k) => { x.beginPath(); x.moveTo(lx, 6); x.lineTo(lx + (k%2?2:-2), 13); x.stroke(); });
+      x.beginPath(); x.moveTo(7, -5); x.lineTo(13, -19); x.lineTo(19, -17); x.lineTo(15, -3); x.closePath(); x.fill();
+      x.beginPath(); x.ellipse(17, -20, 7, 5, -.3, 0, 7); x.fill();   // head
+      x.fillStyle = '#f3c677';                                        // horn
+      x.beginPath(); x.moveTo(20, -25); x.lineTo(24, -35); x.lineTo(16, -26); x.closePath(); x.fill();
+      x.fillStyle = '#ff8fa3';                                        // mane + tail
+      x.beginPath(); x.moveTo(13, -24); x.quadraticCurveTo(4, -20, 6, -6);
+      x.quadraticCurveTo(12, -12, 16, -22); x.closePath(); x.fill();
+      x.strokeStyle = '#ff8fa3'; x.lineWidth = 3;
+      x.beginPath(); x.moveTo(-13, -4); x.quadraticCurveTo(-22, 2, -18, 12); x.stroke();
+    }
+    x.restore();
+  }
 
   function heart(px,py,s,col,a){
     x.save(); x.globalAlpha=a; x.translate(px,py); x.scale(s,s); x.fillStyle=col;
@@ -846,6 +966,26 @@
 
     wet += ((skyMode === 'clear' ? 0 : 1) - wet) * .02;
     x.globalAlpha = 1;
+
+    // the flying couples, with a little trail of dust behind them
+    for (const f of fliers){
+      f.t += .016; f.x += f.vx;
+      f.y += Math.cos(f.t * 2.2 + f.ph) * .9;
+      const fy = f.y + Math.sin(f.t * 2.2 + f.ph) * f.amp * .12;
+      if (!reduce && Math.random() < .5)
+        dust.push({ x: f.x - f.vx*2, y: fy + 4, life: 1, c: f.kind === 'butterfly' ? '#ff8fa3' : '#f3c677' });
+      drawFlier({ ...f, y: fy });
+    }
+    fliers = fliers.filter(f => f.x > -140 && f.x < W + 140);
+
+    for (const d of dust){
+      d.life -= .012; d.y += .25;
+      x.globalAlpha = Math.max(d.life, 0) * .8; x.fillStyle = d.c;
+      x.beginPath(); x.arc(d.x, d.y, 1.6 * d.life + .4, 0, 7); x.fill();
+    }
+    dust = dust.filter(d => d.life > 0);
+    x.globalAlpha = 1;
+
     hearts = hearts.filter(h => h.life > 0);
     for (const h of hearts){
       h.x += h.vx; h.y += h.vy; h.vy += .22; h.vx *= .99; h.life -= .008;
