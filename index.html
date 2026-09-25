@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1a1020">
-<meta property="og:title" content="Chetna, I have a few questions…">
-<meta property="og:description" content="Five very important questions. There's a prize at the end.">
+<meta property="og:title" content="Tomorrow night, Chetna">
+<meta property="og:description" content="The plan is locked in. Plus some pick-up lines you didn't ask for.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦄</text></svg>">
-<title>Saturday, With Me?</title>
+<title>Tomorrow Night</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&display=swap">
 <style>
   :root{
-    --ink:#1a1020;        /* late-evening plum */
+    --ink:#1a1020;
     --ink-2:#26182e;
     --line:#3d2a47;
     --text:#f6ece4;
@@ -23,8 +23,10 @@
     --display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
     --body:"Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   }
+  *{box-sizing:border-box}
   html,body{height:100%}
   body{
+    margin:0;
     background:
       radial-gradient(120% 70% at 50% 110%, #4a2340 0%, transparent 60%),
       radial-gradient(80% 50% at 85% -10%, #2f1d45 0%, transparent 60%),
@@ -32,127 +34,177 @@
     background-attachment:fixed;
     color:var(--text);
     font-family:var(--body);
-    font-size:16px;
-    line-height:1.55;
+    font-size:16px;line-height:1.55;
     padding-inline:16px;
     overflow-x:hidden;
   }
   #sky{position:fixed;inset:0;pointer-events:none;z-index:0}
   main{
     position:relative;z-index:1;
-    max-width:540px;margin:0 auto;
+    max-width:560px;margin:0 auto;
     min-height:100%;
     display:flex;flex-direction:column;justify-content:center;
-    padding-block:48px;
+    padding-block:44px;
   }
-  .progress{display:flex;gap:6px;margin-bottom:28px}
-  .progress span{flex:1;height:3px;border-radius:2px;background:var(--line);transition:background .4s}
-  .progress span.on{background:var(--rose)}
   .eyebrow{
     font-size:12px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--gold);font-weight:600;margin:0 0 12px;
   }
-  h1,h2{
-    font-family:var(--display);font-weight:400;
-    line-height:1.05;margin:0 0 16px;text-wrap:balance;
-  }
-  h1{font-size:clamp(44px,11vw,72px)}
-  h2{font-size:clamp(34px,8vw,48px)}
+  h1,h2{font-family:var(--display);font-weight:400;line-height:1.05;margin:0 0 14px;text-wrap:balance}
+  h1{font-size:clamp(42px,10.5vw,68px)}
+  h2{font-size:clamp(32px,7.5vw,46px)}
   h1 em,h2 em{color:var(--rose)}
   p{margin:0 0 16px;color:var(--muted);max-width:60ch}
   .screen{animation:rise .6s cubic-bezier(.2,.7,.2,1)}
   @keyframes rise{from{opacity:.001;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-  .options{display:grid;gap:10px;margin-top:20px}
-  .opt{
-    appearance:none;text-align:left;cursor:pointer;
-    font:inherit;color:var(--text);
-    background:var(--ink-2);
-    border:1px solid var(--line);border-radius:14px;
-    padding:16px 18px;
-    display:flex;justify-content:space-between;align-items:center;gap:12px;
-    transition:border-color .2s, transform .15s, background .2s;
-  }
-  .opt small{color:var(--muted);font-size:13px}
-  .opt:hover{border-color:var(--rose);transform:translateY(-1px)}
-  .opt:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-  .opt.picked{background:#3a1f35;border-color:var(--rose)}
-
-  .reaction{
-    min-height:1.6em;margin-top:18px;
-    font-family:var(--display);font-style:italic;font-size:22px;color:var(--gold);
-  }
-
   .btn{
     appearance:none;cursor:pointer;font:inherit;font-weight:600;
-    border-radius:999px;padding:14px 28px;border:1px solid transparent;
+    border-radius:999px;padding:14px 26px;border:1px solid transparent;
     transition:transform .15s, background .2s;
   }
   .btn.primary{background:var(--rose);color:#2a0f1c}
   .btn.primary:hover{transform:scale(1.03)}
   .btn.ghost{background:transparent;border-color:var(--line);color:var(--muted)}
+  .btn:focus-visible,.opt:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
   .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:24px}
 
-  /* slider */
-  .meter{margin-top:24px}
-  .meter output{
-    display:block;font-family:var(--display);font-size:88px;line-height:1;color:var(--rose);
-    font-variant-numeric:tabular-nums;
+  /* countdown */
+  .clock{display:flex;gap:10px;margin:6px 0 4px}
+  .clock div{
+    background:var(--ink-2);border:1px solid var(--line);border-radius:12px;
+    padding:10px 0;text-align:center;flex:1;
   }
-  input[type=range]{width:100%;accent-color:var(--rose);margin-top:12px}
-  .scale{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
-
-  /* the ask */
-  .ask-zone{position:relative;min-height:140px;margin-top:28px}
-  #yes{font-size:18px;transition:transform .25s}
-  #no{position:absolute;left:150px;top:6px;transition:left .25s, top .25s}
+  .clock b{
+    display:block;font-family:var(--display);font-size:clamp(26px,8vw,38px);
+    line-height:1;color:var(--gold);font-variant-numeric:tabular-nums;
+  }
+  .clock span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
   /* ticket */
-  .ticket{
-    margin-top:24px;
-    background:var(--text);color:#2a1628;
-    border-radius:18px;overflow:hidden;
-  }
+  .ticket{margin-top:22px;background:var(--text);color:#2a1628;border-radius:18px;overflow:hidden}
   .ticket-head{
-    padding:20px 22px;
-    border-bottom:2px dashed #d9c3c9;
+    padding:20px 22px;border-bottom:2px dashed #d9c3c9;
     display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;
   }
   .ticket-head .date{font-family:var(--display);font-size:34px;line-height:1}
   .ticket-head .who{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8a5a73;font-weight:600}
   .stops{list-style:none;margin:0;padding:8px 22px 18px}
   .stops li{
-    display:grid;grid-template-columns:64px 1fr;gap:14px;
+    display:grid;grid-template-columns:56px 1fr 78px;gap:12px;align-items:center;
     padding:14px 0;border-bottom:1px solid #ecdde0;
   }
   .stops li:last-child{border-bottom:0}
-  .stops time{font-variant-numeric:tabular-nums;font-weight:600;color:#b0476a;font-size:14px;padding-top:3px}
+  .stops time{font-variant-numeric:tabular-nums;font-weight:600;color:#b0476a;font-size:14px}
   .stops b{font-family:var(--display);font-weight:400;font-size:24px;display:block;line-height:1.15}
   .stops span{color:#6d5563;font-size:14px}
-  .fine{font-size:13px;color:var(--muted);margin-top:18px}
-
-  *{box-sizing:border-box}
-  body{margin:0}
-
-  /* storybook */
-  .story{
-    margin-top:8px;
-    font-family:var(--display);font-size:clamp(20px,5vw,23px);line-height:1.45;
-    color:var(--text);min-height:9em;
+  .stops img{width:78px;height:78px;object-fit:cover;border-radius:10px;display:block}
+  @media (max-width:360px){
+    .stops li{grid-template-columns:52px 1fr}
+    .stops img{display:none}
   }
-  .story p{color:var(--text);font-size:inherit;margin:0}
-  .story .drop::first-letter{
-    float:left;font-size:3.4em;line-height:.8;padding:6px 10px 0 0;color:var(--gold);
+  .fine{font-size:13px;color:var(--muted);margin-top:16px}
+
+  /* pick-up lines */
+  .chapter{
+    font-family:var(--display);font-size:clamp(28px,6.5vw,38px);color:var(--text);
+    line-height:1.1;margin-bottom:6px;
   }
-  .story em{color:var(--rose)}
-  .pages{display:flex;gap:6px;margin-top:22px}
+  .line{
+    margin:8px 0 0;padding:18px 0 4px;
+    border-top:1px solid var(--line);
+    font-family:var(--display);font-size:clamp(22px,5.6vw,27px);
+    line-height:1.38;color:var(--text);min-height:6em;
+  }
+  .line::first-letter{font-size:2.1em;line-height:.9;color:var(--gold);float:left;padding:8px 8px 0 0}
+  .meterbar{height:4px;border-radius:2px;background:var(--line);overflow:hidden;margin-top:22px}
+  .meterbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--rose));transition:width .4s}
+  .meterlabel{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:8px}
+
+  /* options */
+  .options{display:grid;gap:10px;margin-top:20px}
+  .opt{
+    appearance:none;text-align:left;cursor:pointer;font:inherit;color:var(--text);
+    background:var(--ink-2);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;
+    transition:border-color .2s, transform .15s, background .2s;
+  }
+  .opt small{color:var(--muted);font-size:13px}
+  .opt:hover{border-color:var(--rose);transform:translateY(-1px)}
+  .opt.picked{background:#3a1f35;border-color:var(--rose)}
+  .reaction{min-height:1.6em;margin-top:18px;font-family:var(--display);font-style:italic;font-size:22px;color:var(--gold)}
+
+  /* weather + ask box */
+  .weather{
+    margin-top:18px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;
+    background:var(--ink-2);display:flex;gap:14px;align-items:center;
+  }
+  .wx{flex:0 0 56px;line-height:0}
+  .wx-text{display:grid;gap:3px;min-width:0}
+  .wx-cloud{animation:drift 5.5s ease-in-out infinite}
+  @keyframes drift{0%,100%{transform:translateX(-2px)}50%{transform:translateX(3px)}}
+  .wx-drop{animation:falldrop 1.1s linear infinite;transform-origin:center}
+  .wx-drop.wx-d2{animation-delay:.36s}
+  .wx-drop.wx-d3{animation-delay:.72s}
+  @keyframes falldrop{
+    0%{opacity:0;transform:translateY(-5px)}
+    25%{opacity:1}
+    100%{opacity:0;transform:translateY(12px)}
+  }
+  .wx-moon{animation:glow 4s ease-in-out infinite}
+  @keyframes glow{0%,100%{opacity:.85}50%{opacity:1}}
+  .wx-twinkle{animation:twinkle 2.4s ease-in-out infinite}
+  .wx-twinkle.wx-d2{animation-delay:.8s}
+  .wx-twinkle.wx-d3{animation-delay:1.6s}
+  @keyframes twinkle{0%,100%{opacity:.25}50%{opacity:1}}
+  @media (prefers-reduced-motion:reduce){
+    .wx-cloud,.wx-drop,.wx-moon,.wx-twinkle{animation:none}
+  }
+  .weather b{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .weather span{font-size:15px;color:var(--text)}
+  .weather .quip{color:var(--muted);font-size:14px}
+  .ask-box{
+    margin-top:22px;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--ink-2);
+  }
+  .ask-box label{display:block;font-size:15px;color:var(--muted);margin-bottom:12px}
+  .ask-box label b{color:var(--text);font-weight:600}
+  .field{display:flex;gap:8px;flex-wrap:wrap}
+  .field input{
+    flex:1 1 180px;min-width:0;font:inherit;color:var(--text);
+    background:#1d1226;border:1px solid var(--line);border-radius:999px;padding:12px 18px;
+  }
+  .field input::placeholder{color:#8a7684}
+  .field input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .field .btn{padding:12px 22px}
+  a.btn{text-decoration:none;display:inline-block}
+
+  /* game */
+  .gamehud{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+    color:var(--gold);margin-bottom:10px;
+  }
+  .game{
+    display:block;width:100%;height:min(58vh,420px);
+    background:linear-gradient(180deg,#241634 0%,#3a2040 100%);
+    border:1px solid var(--line);border-radius:16px;touch-action:none;cursor:grab;
+  }
+
+  /* fairytales */
+  .tale{
+    margin-top:18px;font-family:var(--display);font-size:clamp(19px,4.8vw,23px);
+    line-height:1.45;color:var(--text);
+  }
+  .tale::first-letter{font-size:2.1em;line-height:.9;color:var(--gold);float:left;padding:7px 8px 0 0}
+  .pages{display:flex;gap:6px;margin-top:20px}
   .pages i{width:7px;height:7px;border-radius:50%;background:var(--line)}
   .pages i.on{background:var(--gold)}
-  .sparkle{color:var(--gold)}
+  .polaroid img{max-height:62vh;object-fit:cover;object-position:top center}
+
+  /* polaroid */
   .polaroid{
-    margin:20px 0 0;padding:10px 10px 14px;background:#fbf5ef;border-radius:4px;
-    transform:rotate(-1.6deg);box-shadow:0 14px 34px rgba(0,0,0,.45);
-    max-width:100%;
+    margin:22px 0 0;padding:10px 10px 14px;background:#fbf5ef;border-radius:4px;
+    transform:rotate(-1.6deg);box-shadow:0 14px 34px rgba(0,0,0,.45);max-width:100%;
   }
   .polaroid img{display:block;width:100%;height:auto;border-radius:2px}
   .polaroid figcaption{
@@ -165,7 +217,6 @@
     *{transition:none!important}
   }
 </style>
-
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
@@ -175,11 +226,9 @@
 (() => {
   const app = document.getElementById('app');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const answers = {};
-  const TOTAL = 5;
   const NAME = 'Chetna';
+  const DATE = new Date(2026, 8, 26, 18, 30);   // Saturday 26 September, 6:30pm
 
-  // Answers are sent to Inder as push notifications (ntfy.sh topic below)
   const TOPIC = 'chetna-date-ba0f8aef49f1';
   const notify = (title, msg, tags='sparkles') => {
     try {
@@ -189,212 +238,537 @@
       }).catch(()=>{});
     } catch(e){}
   };
-  notify('Chetna opened the page', 'She is reading the questions right now 👀', 'eyes');
+  notify('Chetna opened the page again', 'She is back on the date page.', 'eyes');
 
-  // The date: Saturday 26 September 2026
-  const sat = new Date(2026, 8, 26);
-  const satLong = sat.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long'});
-  const satShort = sat.toLocaleDateString('en-AU',{day:'numeric',month:'short'});
+  const U = id => `https://images.unsplash.com/${id}?w=320&h=320&fit=crop&q=70&auto=format`;
+  const PIC = {
+    bar: U('photo-1640902106532-47dd3a2e833e'),
+    dinner: U('photo-1774509621816-8c097e4f2d88'),
+    view: U('photo-1583565929583-c5aa76ab16f3'),
+  };
 
-  const progress = n => `<div class="progress">${Array.from({length:TOTAL},(_,i)=>`<span class="${i<n?'on':''}"></span>`).join('')}</div>`;
+  const ticket = `
+    <div class="ticket">
+      <div class="ticket-head">
+        <div><div class="who">Admit two · Chetna &amp; Inder</div><div class="date">Saturday 26 September</div></div>
+        <div class="who">Confirmed</div>
+      </div>
+      <ol class="stops">
+        <li><time>6:30pm</time><div><b>Bar hopping</b><span>Starting with a surprise drink, bartender's pick.</span></div><img src="${PIC.bar}" alt="A dimly lit cocktail bar" loading="lazy"></li>
+        <li><time>8:30pm</time><div><b>Dinner</b><span>A table somewhere I've picked. You'll love it.</span></div><img src="${PIC.dinner}" alt="A candlelit dinner table" loading="lazy"></li>
+        <li><time>10:30pm</time><div><b>A view point</b><span>City lights from up high. I'm bringing a jacket for you.</span></div><img src="${PIC.view}" alt="City lights at night" loading="lazy"></li>
+      </ol>
+    </div>`;
 
-  const questions = [
-    {
-      key:'vibe', eyebrow:'Question one',
-      q:'Your ideal Saturday night <em>feels like…</em>',
-      opts:[
-        ['Glam and a little chaotic','dress up, go out, see where it lands', 'Oh, I can work with that.'],
-        ['Cosy and slow','good food, long chats', 'Noted. Soft-launch energy.'],
-        ['A tiny adventure','somewhere we\'ve never been', 'Say less. Adventure it is.'],
-      ]
-    },
-    {
-      key:'drink', eyebrow:'Question two',
-      q:'First drink of the night?',
-      opts:[
-        ['Espresso martini','for the stamina', 'A woman who plans ahead.'],
-        ['Aperol spritz','it\'s basically a sunset in a glass', 'Classy. Obviously.'],
-        ['Margarita','salt rim, no notes', 'Spicy choice. I respect it.'],
-        ['Surprise me','bartender\'s pick', 'Trusting me already? Cute.'],
-      ]
-    },
-    { key:'cute', type:'slider', eyebrow:'Question three' },
-    {
-      key:'food', eyebrow:'Question four',
-      q:'Dinner craving?',
-      opts:[
-        ['Italian','pasta, candles, the whole thing', 'Carbs and candlelight. Perfect.'],
-        ['Japanese','sushi, izakaya, sake', 'Chopstick skills: to be tested.'],
-        ['Something fancy','let\'s be a bit extra', 'You deserve extra. Always.'],
-        ['You pick','I trust you', 'Challenge accepted.'],
-      ]
-    },
-    {
-      key:'end', eyebrow:'Last one, promise',
-      q:'Best way to end a night?',
-      opts:[
-        ['A slow walk','hand in hand, no rush', 'Just you, me, and the city.'],
-        ['A view point','city lights from up high', 'Front-row seats to the skyline.'],
-      ]
-    },
-  ];
-
-  function intro(){
+  // ---------- screen 1: the plan ----------
+  function plan(){
     app.innerHTML = `<section class="screen">
-      <p class="eyebrow">For Chetna, specifically</p>
-      <h1>Hey ${NAME}. <em>I have a few questions.</em></h1>
-      <p>Five of them. Very important. Answer honestly — there is a prize at the end.</p>
-      <div class="row"><button class="btn primary" id="go">Okay, I'm curious</button></div>
+      <p class="eyebrow">It's official · tomorrow night</p>
+      <h1>Hi ${NAME}. <em>One sleep to go.</em></h1>
+      <div class="clock" id="clock"></div>
+      <p class="fine" style="margin-top:4px">until I pick you up</p>
+      <div class="weather" id="weather" hidden></div>
+      ${ticket}
+      <p class="fine">Dress code: whatever makes you feel gorgeous. Times are flexible — you're not.</p>
+      <div class="row">
+        <button class="btn primary" id="go">There's more on this page</button>
+        <a class="btn ghost" id="ics" download="saturday-with-inder.ics">Add to the calendar</a>
+      </div>
     </section>`;
-    document.getElementById('go').onclick = () => ask(0);
+    tick(); weather(); calendarLink();
+    document.getElementById('go').onclick = () => lines(0);
   }
 
-  function ask(i){
-    const q = questions[i];
-    if (!q) return story(0);
-    if (q.type === 'slider') return slider(i);
+  // live Melbourne forecast for Saturday evening
+  async function weather(){
+    const el = document.getElementById('weather');
+    if (!el) return;
+    try {
+      const r = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-37.8136&longitude=144.9631&hourly=temperature_2m,weather_code,precipitation_probability&timezone=Australia%2FMelbourne&start_date=2026-09-26&end_date=2026-09-26');
+      const j = await r.json();
+      const t = Math.round(j.hourly.temperature_2m[18]);
+      const late = Math.round(j.hourly.temperature_2m[22]);
+      const rain = j.hourly.precipitation_probability[18];
+      const code = j.hourly.weather_code[18];
+      const sky = code === 0 ? 'clear' : code <= 2 ? 'mostly clear' : code === 3 ? 'overcast'
+                : code <= 48 ? 'foggy' : code <= 67 ? 'rainy' : code <= 77 ? 'snowy' : code <= 82 ? 'showery' : 'wild';
+      const quip = rain >= 50 ? "Rain's likely, so I'm bringing an umbrella as well as the jacket."
+                 : t <= 12 ? "Cold enough that the jacket is definitely happening."
+                 : late <= 11 ? "Fine at dinner, chilly at the view point. Jacket's in the car."
+                 : "Nice night for it. Jacket's coming anyway.";
+      const mode = (rain >= 50 || (code >= 51 && code <= 82)) ? 'rain' : (code >= 3 && code <= 48) ? 'cloud' : 'clear';
+      setSky(mode);
+      el.hidden = false;
+      el.innerHTML = `<div class="wx">${wxIcon(mode)}</div>
+        <div class="wx-text">
+          <b>Saturday, 6:30pm in Melbourne</b>
+          <span>${t}° and ${sky}, dropping to ${late}° by the view point · ${rain}% chance of rain</span>
+          <span class="quip">${quip}</span>
+        </div>`;
+    } catch(e){ /* no forecast, no problem */ }
+  }
+
+  // little animated icon for the forecast card
+  function wxIcon(mode){
+    if (mode === 'clear') return `<svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true">
+      <circle class="wx-moon" cx="34" cy="28" r="13" fill="#f3c677"/>
+      <circle cx="27" cy="23" r="11" fill="#26182e"/>
+      <circle class="wx-twinkle" cx="16" cy="44" r="1.8" fill="#f6ece4"/>
+      <circle class="wx-twinkle wx-d2" cx="49" cy="47" r="1.4" fill="#f6ece4"/>
+      <circle class="wx-twinkle wx-d3" cx="44" cy="12" r="1.6" fill="#f6ece4"/>
+    </svg>`;
+    const drops = mode === 'rain' ? `
+      <line class="wx-drop" x1="20" y1="42" x2="17" y2="50" stroke="#8fb8ff" stroke-width="3" stroke-linecap="round"/>
+      <line class="wx-drop wx-d2" x1="31" y1="42" x2="28" y2="50" stroke="#8fb8ff" stroke-width="3" stroke-linecap="round"/>
+      <line class="wx-drop wx-d3" x1="42" y1="42" x2="39" y2="50" stroke="#8fb8ff" stroke-width="3" stroke-linecap="round"/>` : '';
+    return `<svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true">
+      <g class="wx-cloud">
+        <circle cx="24" cy="30" r="11" fill="#e7dbe6"/>
+        <circle cx="38" cy="30" r="9" fill="#e7dbe6"/>
+        <rect x="22" y="30" width="18" height="10" rx="5" fill="#e7dbe6"/>
+      </g>
+      ${drops}
+    </svg>`;
+  }
+
+  // .ics so the night lands in her calendar
+  function calendarLink(){
+    const a = document.getElementById('ics');
+    if (!a) return;
+    const stamp = d => d.getFullYear() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0')
+                 + 'T' + String(d.getHours()).padStart(2,'0') + String(d.getMinutes()).padStart(2,'0') + '00';
+    const end = new Date(2026, 8, 26, 23, 30);
+    const ics = [
+      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Ishi//Date//EN','BEGIN:VEVENT',
+      'UID:saturday-' + Date.now() + '@ishi',
+      'DTSTART;TZID=Australia/Melbourne:' + stamp(DATE),
+      'DTEND;TZID=Australia/Melbourne:' + stamp(end),
+      'SUMMARY:Date night with Inder',
+      'LOCATION:Melbourne',
+      'DESCRIPTION:6:30pm bar hopping (surprise drink)\\n8:30pm dinner (my pick)\\n10:30pm the view point\\nDress code: whatever makes you feel gorgeous.',
+      'END:VEVENT','END:VCALENDAR'
+    ].join('\r\n');
+    a.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+    a.onclick = () => notify('She added it to her calendar', 'Saturday 6:30pm is officially in her phone.', 'calendar');
+  }
+
+  let clockTimer;
+  function tick(){
+    clearInterval(clockTimer);
+    const paint = () => {
+      const el = document.getElementById('clock');
+      if (!el) return clearInterval(clockTimer);
+      let ms = DATE - new Date();
+      if (ms <= 0){ el.innerHTML = `<div style="flex:1"><b>Tonight</b><span>see you at 6:30</span></div>`; return; }
+      const d = Math.floor(ms/864e5), h = Math.floor(ms/36e5)%24, m = Math.floor(ms/6e4)%60, s = Math.floor(ms/1e3)%60;
+      el.innerHTML = [[d,'days'],[h,'hours'],[m,'mins'],[s,'secs']]
+        .map(([v,l])=>`<div><b>${String(v).padStart(2,'0')}</b><span>${l}</span></div>`).join('');
+    };
+    paint(); clockTimer = setInterval(paint, 1000);
+  }
+
+  // ---------- screen 2: pick-up lines ----------
+  const LINES = [
+    ["Are you a fairy? Because you somehow made my ordinary day feel magical. ✨🧚‍♀️",
+     "And that was just a Tuesday."],
+    ["If unicorns are real, then you must be the rarest one of all. 🦄💖",
+     "One of one. No others in existence."],
+    ["I was looking for a little magic today… then I found you. ✨",
+     "Stopped looking after that."],
+    ["Are you secretly a fairy princess? Because you've definitely cast a spell on me. 🧚‍♀️👑",
+     "No notes. No defence. Fully under."],
+    ["Forget rainbows and unicorns — I think I just found the cutest magical creature right here. 🦄🌈💕",
+     "See you at 6:30, magical creature."],
+  ];
+  const MOOD = ['warming up','a little bit melting','smiling, I saw it','no going back now','see you at 6:30'];
+
+  function lines(i){
+    const [text, aside] = LINES[i];
+    const pct = Math.round(((i+1)/LINES.length)*100);
+    const last = i === LINES.length-1;
     app.innerHTML = `<section class="screen">
-      ${progress(i)}
-      <p class="eyebrow">${q.eyebrow}</p>
-      <h2>${q.q}</h2>
+      <p class="eyebrow">A little book of magic</p>
+      <div class="chapter">Chapter ${i+1} of ${LINES.length}</div>
+      <blockquote class="line">${text}</blockquote>
+      <p class="fine" style="margin-top:6px">${aside}</p>
+      <div class="meterbar"><i style="width:${pct}%"></i></div>
+      <div class="meterlabel"><span>Swoon meter</span><span>${MOOD[i]}</span></div>
+      <div class="row">
+        <button class="btn primary" id="next">${last ? 'Close the book' : 'Turn the page'}</button>
+        ${last ? '' : '<button class="btn ghost" id="skip">Skip ahead</button>'}
+      </div>
+    </section>`;
+    document.getElementById('next').onclick = () => last ? tales(0) : lines(i+1);
+    const sk = document.getElementById('skip');
+    if (sk) sk.onclick = () => { notify('She skipped the pick-up lines', `Made it to line ${i+1} of ${LINES.length}.`, 'zipper_mouth_face'); tales(0); };
+    if (last) notify('She read every pick-up line', `All ${LINES.length}. Swoon meter maxed out.`, 'star');
+  }
+
+  // ---------- the fairytales ----------
+  const TALES = [
+    { img:'tale-blue.jpg', alt:'Chetna in a pale blue suit', cap:'Exhibit A: the winter fairy',
+      title:'The Winter Fairy',
+      text:'In a kingdom of quiet white halls there lived a fairy who wore the winter sky. She only had to glance over her shoulder and entire conversations would stop mid-sentence. The palace blamed a draught. It was never a draught.' },
+    { img:'tale-green.jpg', alt:'Chetna in an emerald green outfit', cap:'Exhibit B: the reason spring is early',
+      title:'The Fairy of the First Spring',
+      text:'Spring used to turn up whenever it felt like it. Then a fairy in emerald green smiled once, and every leaf in the forest changed to the same colour out of sheer admiration. Spring arrives early now. Just in case she smiles again.' },
+    { img:'tale-sea.jpg', alt:'Chetna on the deck of a ship', cap:'Exhibit C: the sea, behaving itself',
+      title:'The Voyage',
+      text:'The sea is famously moody. But one afternoon a girl stood at the railing of a ship, and the whole ocean went flat and blue so as not to embarrass itself in front of her. The sailors logged it as good weather. The sea knows what really happened.' },
+    { img:'tale-bridge.jpg', alt:'Chetna in a red floral dress on a wooden bridge', cap:'Exhibit D: the bridge keeper never recovered',
+      title:'The Enchanted Bridge',
+      text:'Every bridge in the old stories has a keeper who demands a toll. This one asked her for a riddle, immediately forgot the riddle, and let her cross for nothing. He still tells people about the girl in the red dress.' },
+    { img:'chetna-deer.jpg', alt:'Chetna gently patting a deer', cap:'Exhibit E: the deer who told everyone',
+      title:'The Deer Who Told Everyone',
+      text:'And far away in another forest, a deer who had never let anybody near him lay down beside her as if they had always been friends. He has dined out on that story ever since. Tomorrow night, I find out how he felt.' },
+  ];
+
+  function tales(i){
+    const tl = TALES[i], last = i === TALES.length-1;
+    app.innerHTML = `<section class="screen">
+      <p class="eyebrow">Five true fairytales · ${i+1} of ${TALES.length}</p>
+      <h2>${tl.title}</h2>
+      <figure class="polaroid">
+        <img src="${tl.img}" alt="${tl.alt}" loading="${i ? 'lazy' : 'eager'}">
+        <figcaption>${tl.cap}</figcaption>
+      </figure>
+      <p class="tale">${tl.text}</p>
+      <div class="pages">${TALES.map((_,k)=>`<i class="${k<=i?'on':''}"></i>`).join('')}</div>
+      <div class="row">
+        <button class="btn primary" id="nextt">${last ? 'The end' : 'Next tale'}</button>
+        ${last ? '' : '<button class="btn ghost" id="skipt">Skip ahead</button>'}
+      </div>
+    </section>`;
+    document.getElementById('nextt').onclick = () => last ? gameIntro() : tales(i+1);
+    const sk = document.getElementById('skipt');
+    if (sk) sk.onclick = gameIntro;
+    if (last) notify('She read all five fairytales', 'Right to the deer at the end.', 'books');
+  }
+
+  // ---------- screen 3: the unicorn game ----------
+  const GAME_SECONDS = 30;
+  let best = 0;
+  try { best = parseInt(localStorage.getItem('unicornBest') || '0', 10) || 0; } catch(e){}
+
+  function gameIntro(){
+    app.innerHTML = `<section class="screen">
+      <p class="eyebrow">Small game · ${GAME_SECONDS} seconds</p>
+      <h2>Catch the <em>hearts.</em></h2>
+      <p>Slide your finger to move the unicorn. Little hearts are 1 point, kisses are 2, and the big glowing hearts are worth 5 — those ones I owe you in person.${best ? ` Your best so far: <b style="color:var(--gold)">${best}</b>.` : ''}</p>
+      <div class="row">
+        <button class="btn primary" id="play">Play</button>
+        <button class="btn ghost" id="skipg">Not now</button>
+      </div>
+    </section>`;
+    document.getElementById('play').onclick = play;
+    document.getElementById('skipg').onclick = feeling;
+  }
+
+  function play(){
+    app.innerHTML = `<section class="screen">
+      <div class="gamehud"><span id="score">0 hearts</span><span id="time">${GAME_SECONDS}s</span></div>
+      <canvas id="g" class="game"></canvas>
+      <p class="fine">Slide left and right. Arrow keys work too.</p>
+    </section>`;
+
+    const cv = document.getElementById('g'), g = cv.getContext('2d');
+    const scoreEl = document.getElementById('score'), timeEl = document.getElementById('time');
+    let W = 0, H = 0, ux = 0, target = 0, score = 0, drops = [], pops = [], over = false;
+    const caught = { heart: 0, kiss: 0, big: 0 };
+    let spawn = 0, last = performance.now(), left = GAME_SECONDS * 1000;
+
+    const fitGame = () => {
+      const r = cv.getBoundingClientRect();
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      W = r.width; H = r.height;
+      cv.width = W * dpr; cv.height = H * dpr;
+      g.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (!ux) { ux = W / 2; target = W / 2; }
+      ux = Math.min(Math.max(ux, 34), W - 34);
+      target = Math.min(Math.max(target, 34), W - 34);
+    };
+    fitGame(); addEventListener('resize', fitGame);
+
+    const move = e => {
+      const r = cv.getBoundingClientRect();
+      const px = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+      target = Math.min(Math.max(px, 34), W - 34);
+      if (e.cancelable) e.preventDefault();
+    };
+    // secret: five taps on the unicorn
+    let pats = 0, secret = '';
+    cv.addEventListener('pointerdown', e => {
+      const r = cv.getBoundingClientRect();
+      const px = e.clientX - r.left, py = e.clientY - r.top;
+      if (Math.abs(px - ux) < 40 && py > H - 90){
+        pats++;
+        if (pats === 5){
+          secret = 'She says hi back. And so do I.';
+          notify('She found the secret 🦄', 'Five pats on the unicorn. Of course she did.', 'unicorn');
+        } else if (pats < 5 && pats > 2){
+          secret = 'Keep patting. Something happens at five.';
+        }
+      }
+    });
+    cv.addEventListener('pointermove', move);
+    cv.addEventListener('pointerdown', move);
+    cv.addEventListener('touchmove', move, {passive:false});
+    const keys = e => {
+      if (e.key === 'ArrowLeft') target = Math.max(34, target - 34);
+      if (e.key === 'ArrowRight') target = Math.min(W - 34, target + 34);
+    };
+    addEventListener('keydown', keys);
+
+    function unicorn(x, y){
+      g.save(); g.translate(x, y);
+      // tail
+      g.strokeStyle = '#ff8fa3'; g.lineWidth = 5; g.lineCap = 'round';
+      g.beginPath(); g.moveTo(-22, -16); g.quadraticCurveTo(-34, -6, -28, 10); g.stroke();
+      // body
+      g.fillStyle = '#fbf3ec';
+      g.beginPath(); g.ellipse(0, -10, 24, 15, 0, 0, 7); g.fill();
+      // legs
+      g.strokeStyle = '#fbf3ec'; g.lineWidth = 6;
+      [-12, -2, 8, 16].forEach((lx, k) => { g.beginPath(); g.moveTo(lx, 0); g.lineTo(lx + (k%2?2:-2), 14); g.stroke(); });
+      // neck + head
+      g.fillStyle = '#fbf3ec';
+      g.beginPath(); g.moveTo(10, -18); g.lineTo(20, -40); g.lineTo(30, -38); g.lineTo(24, -14); g.closePath(); g.fill();
+      g.beginPath(); g.ellipse(27, -42, 11, 8, -.3, 0, 7); g.fill();
+      // horn
+      g.fillStyle = '#f3c677';
+      g.beginPath(); g.moveTo(31, -49); g.lineTo(37, -66); g.lineTo(25, -51); g.closePath(); g.fill();
+      // mane
+      g.fillStyle = '#ff8fa3';
+      g.beginPath(); g.moveTo(20, -48); g.quadraticCurveTo(8, -44, 10, -18); g.quadraticCurveTo(18, -26, 24, -44); g.closePath(); g.fill();
+      // eye
+      g.fillStyle = '#2a1628';
+      g.beginPath(); g.arc(30, -44, 1.8, 0, 7); g.fill();
+      g.restore();
+    }
+
+    function heartPath(){
+      g.beginPath(); g.moveTo(0, 3);
+      g.bezierCurveTo(-5, -2, -10, 4, 0, 11); g.bezierCurveTo(10, 4, 5, -2, 0, 3);
+    }
+    function drawDrop(x, y, s, kind, a){
+      g.save(); g.globalAlpha = a; g.translate(x, y);
+      if (kind === 'kiss'){
+        // a kiss: two lips
+        g.scale(s * 1.15, s * 1.15);
+        g.fillStyle = '#e8496b';
+        g.beginPath();                               // upper lip, two lobes
+        g.moveTo(-13, 0);
+        g.quadraticCurveTo(-7, -8, 0, -2);
+        g.quadraticCurveTo(7, -8, 13, 0);
+        g.quadraticCurveTo(7, 3, 0, 2);
+        g.quadraticCurveTo(-7, 3, -13, 0);
+        g.fill();
+        g.fillStyle = '#c7304f';                     // lower lip
+        g.beginPath();
+        g.moveTo(-13, 1);
+        g.quadraticCurveTo(0, 3, 13, 1);
+        g.quadraticCurveTo(7, 12, 0, 12);
+        g.quadraticCurveTo(-7, 12, -13, 1);
+        g.fill();
+        g.globalAlpha = a * .45; g.fillStyle = '#ffd7e0';   // shine
+        g.beginPath(); g.ellipse(4, 6, 3.2, 1.6, -.25, 0, 7); g.fill();
+      } else if (kind === 'big'){
+        const pulse = 1 + Math.sin(t*4 + x) * .06;
+        g.scale(s * pulse, s * pulse);
+        g.shadowColor = 'rgba(255,143,163,.9)'; g.shadowBlur = 18;
+        g.fillStyle = '#ff6f8d'; heartPath(); g.fill();
+        g.shadowBlur = 0;
+        g.globalAlpha = a * .5; g.fillStyle = '#ffd7e0';
+        g.beginPath(); g.ellipse(-3, 2, 2.4, 1.6, -.5, 0, 7); g.fill();
+      } else {
+        g.scale(s, s); g.fillStyle = '#ff8fa3'; heartPath(); g.fill();
+      }
+      g.restore();
+    }
+
+    function finish(){
+      over = true;
+      removeEventListener('keydown', keys);
+      try { if (score > best){ best = score; localStorage.setItem('unicornBest', String(score)); } } catch(e){}
+      notify('She played the unicorn game',
+        `${score} points — ${caught.heart} hearts, ${caught.kiss} kisses, ${caught.big} big ones.`, 'unicorn,video_game');
+      const verdict = score >= 45 ? 'Elite unicorn handling. Mildly concerning.'
+                    : score >= 28 ? 'Very respectable. The unicorn is proud.'
+                    : score >= 14 ? 'Solid effort. The unicorn forgives you.'
+                    : 'The unicorn tried its best. So did you.';
+      const owed = [];
+      if (caught.heart) owed.push(`${caught.heart} heart${caught.heart===1?'':'s'}`);
+      if (caught.kiss) owed.push(`${caught.kiss} kiss${caught.kiss===1?'':'es'}`);
+      if (caught.big) owed.push(`${caught.big} big one${caught.big===1?'':'s'}`);
+      app.innerHTML = `<section class="screen">
+        <p class="eyebrow">Time</p>
+        <h2><em>${score}</em> point${score===1?'':'s'}.</h2>
+        <p>${verdict} Best so far: ${best}.</p>
+        <p>You caught ${owed.length ? owed.join(', ') : 'absolutely nothing, somehow'}. I'm treating that as a list of things I owe you tomorrow, and I'm not negotiating it down.</p>
+        <div class="row">
+          <button class="btn primary" id="on">One more thing to ask you</button>
+          <button class="btn ghost" id="replay">Play again</button>
+        </div>
+      </section>`;
+      document.getElementById('on').onclick = feeling;
+      document.getElementById('replay').onclick = play;
+    }
+
+    (function frame(now){
+      if (over) return;
+      const dt = Math.min(now - last, 50); last = now;
+      left -= dt;
+      if (left <= 0) return finish();
+      timeEl.textContent = Math.ceil(left/1000) + 's';
+
+      spawn -= dt;
+      if (spawn <= 0){
+        spawn = 420 + Math.random()*300;
+        const r = Math.random();
+        const kind = r < .16 ? 'big' : r < .45 ? 'kiss' : 'heart';
+        drops.push({
+          x: 30 + Math.random()*(W-60), y: -24,
+          v: kind === 'big' ? .07 + Math.random()*.04 : .10 + Math.random()*.09,
+          s: kind === 'big' ? 2.4 + Math.random()*.5 : kind === 'kiss' ? 1 : .9 + Math.random()*.6,
+          kind
+        });
+      }
+      ux += (target - ux) * .22;
+
+      g.clearRect(0, 0, W, H);
+      // ground line
+      g.strokeStyle = 'rgba(246,236,228,.18)'; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(0, H-18); g.lineTo(W, H-18); g.stroke();
+
+      for (const d of drops){
+        d.y += d.v * dt;
+        const reach = d.kind === 'big' ? 52 : 40;
+        if (!d.hit && d.y > H - 78 && d.y < H - 6 && Math.abs(d.x - ux) < reach){
+          d.hit = true;
+          const worth = d.kind === 'big' ? 5 : d.kind === 'kiss' ? 2 : 1;
+          score += worth; caught[d.kind]++;
+          scoreEl.textContent = score + (score === 1 ? ' point' : ' points');
+          pops.push({ x: d.x, y: d.y, life: 1, kind: d.kind, worth });
+        }
+        if (!d.hit) drawDrop(d.x, d.y, d.s, d.kind, 1);
+      }
+      drops = drops.filter(d => !d.hit && d.y < H + 34);
+
+      for (const p of pops){
+        p.life -= dt/450; p.y -= dt*.045;
+        const a = Math.max(p.life, 0);
+        drawDrop(p.x, p.y, (p.kind === 'big' ? 2.6 : 1.2) * (1.5 - p.life), p.kind, a);
+        g.globalAlpha = a; g.fillStyle = '#f3c677';
+        g.font = '600 13px ' + getComputedStyle(document.body).fontFamily;
+        g.textAlign = 'center'; g.fillText('+' + p.worth, p.x, p.y - 22); g.textAlign = 'start';
+        g.globalAlpha = 1;
+      }
+      pops = pops.filter(p => p.life > 0);
+
+      unicorn(ux, H - 18);
+      if (secret){
+        g.font = '600 14px ' + getComputedStyle(document.body).fontFamily;
+        g.fillStyle = '#f3c677'; g.textAlign = 'center';
+        g.fillText(secret, W/2, 28);
+        g.textAlign = 'start';
+      }
+      requestAnimationFrame(frame);
+    })(performance.now());
+  }
+
+  // ---------- screen 3: the question ----------
+  const FEELINGS = [
+    ['Excited','no notes, let\'s go', 'Same. Obviously same.'],
+    ['Nervous-excited','the good kind of nervous', 'Me too. We can be nervous together at the first bar.'],
+    ['Counting the hours','I checked the clock too', 'Then we\'re even. I\'ve checked it more.'],
+    ['Playing it cool','she says, on this website', 'Very cool. Extremely casual. Noted.'],
+  ];
+  function feeling(){
+    app.innerHTML = `<section class="screen">
+      <p class="eyebrow">One question</p>
+      <h2>How are you feeling about <em>tomorrow night?</em></h2>
+      <p>Be honest. No wrong answers, except the cool one, which I'll see straight through.</p>
       <div class="options">
-        ${q.opts.map((o,j)=>`<button class="opt" data-j="${j}"><span>${o[0]}</span><small>${o[1]}</small></button>`).join('')}
+        ${FEELINGS.map((f,j)=>`<button class="opt" data-j="${j}"><span>${f[0]}</span><small>${f[1]}</small></button>`).join('')}
       </div>
       <div class="reaction" id="react"></div>
     </section>`;
     app.querySelectorAll('.opt').forEach(b => b.onclick = () => {
-      const o = q.opts[+b.dataset.j];
-      answers[q.key] = o[0];
-      notify(`${q.eyebrow}: ${o[0]}`, q.q.replace(/<[^>]+>/g,'') + ' → ' + o[0], 'speech_balloon');
+      const f = FEELINGS[+b.dataset.j];
       app.querySelectorAll('.opt').forEach(x => { x.classList.toggle('picked', x===b); x.disabled = true; });
-      document.getElementById('react').textContent = o[2];
-      setTimeout(() => ask(i+1), 1300);
+      document.getElementById('react').textContent = f[2];
+      notify('Her feeling about tomorrow night', `"${f[0]}" — ${f[1]}`, 'heartbeat');
+      setTimeout(() => finale(f[0]), 1500);
     });
   }
 
-  function slider(i){
-    const lines = {8:'Hmm. Try again.',9:'Getting warmer…',10:'Correct answer. Moving on.'};
-    app.innerHTML = `<section class="screen">
-      ${progress(i)}
-      <p class="eyebrow">Question three</p>
-      <h2>On a scale of 1 to 10, <em>how cute am I?</em></h2>
-      <p>Take your time. Be fair.</p>
-      <div class="meter">
-        <output id="val">8</output>
-        <input type="range" id="cute" min="8" max="10" step="1" value="8" aria-label="How cute am I">
-        <div class="scale"><span>8 (the minimum, sorry)</span><span>10</span></div>
-      </div>
-      <div class="reaction" id="react">${lines[8]}</div>
-      <div class="row"><button class="btn primary" id="next" disabled style="opacity:.4">Lock it in</button></div>
-    </section>`;
-    const r = document.getElementById('cute'), v = document.getElementById('val'),
-          re = document.getElementById('react'), nx = document.getElementById('next');
-    r.oninput = () => {
-      v.textContent = r.value; re.textContent = lines[r.value];
-      const ok = r.value === '10'; nx.disabled = !ok; nx.style.opacity = ok ? 1 : .4;
-    };
-    nx.onclick = () => {
-      answers.cute = 10;
-      notify('Question three: 10/10', 'She rated you 10 out of 10 cute (it only went from 8, but still).', 'star');
-      ask(i+1);
-    };
-  }
-
-  const pages = [
-    `<p class="drop">Once upon a time, in a meadow where the clouds were made of fairy floss, there lived a little unicorn named <em>${NAME}</em>.</p>`,
-    `<p>She wasn't the tallest unicorn, or the loudest. But whenever she laughed, the flowers turned to look, and the rainbows came out early just to see her.</p>`,
-    `<p>Even the shyest creatures of the forest would wander over just to sit beside her. The deer knew. <span class="sparkle">(Photographic evidence below.)</span></p>
-     <figure class="polaroid"><img src="chetna-deer.jpg" alt="Chetna sitting on a stone wall, gently patting a deer" width="1000" height="838"><figcaption>Rare sighting: one unicorn, one very lucky deer</figcaption></figure>`,
-    `<p>The other unicorns tried to work out her secret. Was it the shimmer in her mane? The glitter she left on everything she touched? The way her nose scrunched when she smiled? <span class="sparkle">(It was definitely the nose scrunch.)</span></p>`,
-    `<p>One evening a boy wandered into the meadow, took one look at her, and forgot every word he knew.</p>`,
-    `<p>He's been looking for the right words ever since. He finally found a few — <em>they're on the next page.</em></p>`,
-  ];
-  function story(p){
-    app.innerHTML = `<section class="screen">
-      <p class="eyebrow">Before the big question · a very short story</p>
-      <h2>The littlest <em>unicorn</em></h2>
-      <div class="story">${pages[p]}</div>
-      <div class="pages">${pages.map((_,k)=>`<i class="${k<=p?'on':''}"></i>`).join('')}</div>
-      <div class="row"><button class="btn primary" id="turn">${p < pages.length-1 ? 'Turn the page' : 'Show me the words'}</button></div>
-    </section>`;
-    document.getElementById('turn').onclick = () => p < pages.length-1 ? story(p+1) : theAsk();
-  }
-
-  function theAsk(){
-    const noLines = ['No','Are you sure?','Really sure?','Think again','Wrong button','Nice try','Still no?','Just press yes'];
-    let tries = 0, scale = 1;
-    app.innerHTML = `<section class="screen">
-      ${progress(TOTAL)}
-      <p class="eyebrow">The real question</p>
-      <h1>${NAME}, will you go out with me <em>this ${satLong}?</em></h1>
-      <p>Bar hopping, a proper dinner, and ${answers.end === 'A view point' ? 'the city lights from a view point' : 'a slow walk'} to finish. You already helped plan it.</p>
-      <div class="ask-zone" id="zone">
-        <button class="btn primary" id="yes">Yes</button>
-        <button class="btn ghost" id="no">No</button>
-      </div>
-    </section>`;
-    const zone = document.getElementById('zone'), no = document.getElementById('no'), yes = document.getElementById('yes');
-    const dodge = e => {
-      e && e.preventDefault();
-      tries++;
-      no.textContent = noLines[Math.min(tries, noLines.length-1)];
-      const w = zone.clientWidth - no.offsetWidth, h = zone.clientHeight - no.offsetHeight;
-      no.style.left = Math.max(0, Math.random()*w) + 'px';
-      no.style.top = Math.max(60, Math.random()*h) + 'px';
-      scale = Math.min(scale + .12, 1.8);
-      yes.style.transform = `scale(${scale})`; yes.style.transformOrigin = 'left center';
-      if (tries >= 8) no.hidden = true;
-      if (tries === 1 || tries === 5) notify('She tried to press No 😅', `Attempt ${tries}. The button ran away.`, 'running');
-    };
-    no.addEventListener('mouseenter', dodge);
-    no.addEventListener('click', dodge);
-    no.addEventListener('touchstart', dodge, {passive:false});
-    yes.onclick = yay;
-  }
-
-  function yay(){
+  // ---------- screen 4: sign off ----------
+  function finale(mood){
     burst();
-    notify('SHE SAID YES 💖',
-      `Chetna said YES to ${satLong}!\n\nVibe: ${answers.vibe}\nFirst drink: ${answers.drink}\nCute rating: 10/10\nDinner: ${answers.food}\nEnd of night: ${answers.end}`,
-      'tada,heart');
-    const endStop = answers.end === 'A view point'
-      ? ['A view point','City lights from up high — I\'ll bring a jacket for you.']
-      : ['A slow walk','Hand in hand, no rush, wherever the night goes.'];
-    const food = answers.food === 'You pick' ? 'somewhere I\'ve picked (you\'ll love it)'
-               : answers.food === 'Something fancy' ? 'somewhere a little bit extra'
-               : (answers.food || 'somewhere great').toLowerCase() === 'italian' ? 'Italian, candles included'
-               : answers.food === 'Japanese' ? 'Japanese — sushi and sake' : 'somewhere great';
     app.innerHTML = `<section class="screen">
-      <p class="eyebrow">It's a date</p>
-      <h1>Best answer <em>ever.</em></h1>
-      <p>Here's the plan. Screenshot it, it's official now.</p>
-      <div class="ticket">
-        <div class="ticket-head">
-          <div><div class="who">Admit two · Chetna &amp; Inder</div><div class="date">${satLong}</div></div>
-          <div class="who">${satShort} · Evening</div>
+      <p class="eyebrow">That's all of it</p>
+      <h1>See you at <em>6:30.</em></h1>
+      <p>You're ${mood.toLowerCase()}, I'm somewhere past that. Tomorrow: one surprise drink, one table I've been quietly smug about, and the whole city lit up underneath us.</p>
+      <div class="clock" id="clock"></div>
+      <figure class="polaroid">
+        <img src="chetna-deer.jpg" alt="Chetna sitting on a stone wall, gently patting a deer" width="1000" height="838">
+        <figcaption>Still the best photo ever taken of anyone</figcaption>
+      </figure>
+      <div class="ask-box">
+        <label for="song"><b>One job for you:</b> what's playing in the car on the way?</label>
+        <div class="field">
+          <input id="song" type="text" placeholder="Song, artist, or just a vibe" autocomplete="off">
+          <button class="btn primary" id="sendsong">Send</button>
         </div>
-        <ol class="stops">
-          <li><time>6:30pm</time><div><b>Bar hopping</b><span>Starting with ${answers.drink === 'Surprise me' ? 'a surprise drink, bartender\'s pick' : 'your ' + (answers.drink || 'favourite').toLowerCase()}.</span></div></li>
-          <li><time>8:30pm</time><div><b>Dinner</b><span>A nice table at ${food}.</span></div></li>
-          <li><time>10:30pm</time><div><b>${endStop[0]}</b><span>${endStop[1]}</span></div></li>
-        </ol>
+        <p class="fine" id="songdone" hidden>Got it. It's going on the playlist tonight.</p>
       </div>
-      <p class="fine">Dress code: whatever makes you feel gorgeous (so, anything). Times are flexible — you're not.</p>
-      <div class="row"><button class="btn ghost" id="again">Celebrate again</button></div>
+      <p class="fine">Bring nothing else. I've got the rest.</p>
+      <div class="row">
+        <button class="btn ghost" id="again">Read the lines again</button>
+        <button class="btn ghost" id="planagain">See the plan</button>
+      </div>
     </section>`;
-    document.getElementById('again').onclick = burst;
+    tick();
+    document.getElementById('again').onclick = () => lines(0);
+    document.getElementById('planagain').onclick = plan;
+
+    const song = document.getElementById('song'), send = document.getElementById('sendsong'), done = document.getElementById('songdone');
+    const submit = () => {
+      const v = song.value.trim();
+      if (!v) { song.focus(); return; }
+      notify('Her song request 🎵', v, 'musical_note');
+      song.value = ''; song.disabled = true; send.disabled = true;
+      send.textContent = 'Sent'; done.hidden = false;
+      burst();
+    };
+    send.onclick = submit;
+    song.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
   }
 
-  // ---- ambient stars + heart burst ----
+  // ---------- ambient stars + heart burst ----------
   const c = document.getElementById('sky'), x = c.getContext('2d');
-  let W, H, stars = [], hearts = [];
+  let W, H, stars = [], hearts = [], clouds = [], rain = [], shoot = null;
+  let skyMode = 'clear', wet = 0;   // wet eases 0 → 1 when rain is forecast
+
+  const buildSky = () => {
+    clouds = Array.from({length: 5}, (_, i) => ({
+      x: Math.random()*W, y: 40 + Math.random()*(H*.45),
+      s: .7 + Math.random()*1.1, v: .08 + Math.random()*.12
+    }));
+    rain = Array.from({length: Math.round(W*H/5200)}, () => ({
+      x: Math.random()*W, y: Math.random()*H, v: .35 + Math.random()*.35, l: 8 + Math.random()*12
+    }));
+  };
   const fit = () => {
     const dpr = Math.min(devicePixelRatio||1, 2);
     W = innerWidth; H = innerHeight; c.width = W*dpr; c.height = H*dpr;
     x.setTransform(dpr,0,0,dpr,0,0);
     stars = Array.from({length: Math.round(W*H/9000)}, () => ({x:Math.random()*W, y:Math.random()*H*.8, r:Math.random()*1.2+.2, p:Math.random()*6}));
+    buildSky();
   };
   fit(); addEventListener('resize', fit);
+
+  function setSky(mode){ skyMode = mode; buildSky(); }
 
   function heart(px,py,s,col,a){
     x.save(); x.globalAlpha=a; x.translate(px,py); x.scale(s,s); x.fillStyle=col;
@@ -410,13 +784,67 @@
       s:Math.random()*1.4+.8, c:cols[i%cols.length], life:1
     });
   }
+  // hearts wherever she taps
+  addEventListener('pointerdown', e => {
+    if (e.target.closest('.game')) return;            // the game has its own taps
+    const cols = ['#ff8fa3','#f3c677','#ffc2cf'];
+    const n = reduce ? 3 : 7;
+    for (let i=0;i<n;i++) hearts.push({
+      x:e.clientX, y:e.clientY, vx:(Math.random()-.5)*5, vy:-Math.random()*5-1.5,
+      s:Math.random()*.8+.5, c:cols[i%cols.length], life:1
+    });
+  }, {passive:true});
+
   let t = 0;
   (function loop(){
     t += .016; x.clearRect(0,0,W,H);
+
+    // stars — dimmed when the forecast is grey
+    const starDim = 1 - wet*.65;
     for (const s of stars){
-      x.globalAlpha = reduce ? .6 : .35 + .35*Math.sin(t*1.5+s.p);
+      x.globalAlpha = (reduce ? .6 : .35 + .35*Math.sin(t*1.5+s.p)) * starDim;
       x.fillStyle = '#f6ece4'; x.beginPath(); x.arc(s.x,s.y,s.r,0,7); x.fill();
     }
+
+    // clouds drift in when it's cloudy or raining
+    if (wet > .01){
+      for (const cl of clouds){
+        cl.x += cl.v * (reduce ? 0 : 1);
+        if (cl.x - 90*cl.s > W) cl.x = -90*cl.s;
+        x.globalAlpha = .07 * wet;
+        x.fillStyle = '#d9c8e6';
+        x.beginPath();
+        x.ellipse(cl.x, cl.y, 78*cl.s, 26*cl.s, 0, 0, 7);
+        x.ellipse(cl.x + 46*cl.s, cl.y + 8*cl.s, 52*cl.s, 19*cl.s, 0, 0, 7);
+        x.fill();
+      }
+    }
+
+    // rain, only when rain is actually forecast
+    if (skyMode === 'rain' && wet > .05 && !reduce){
+      x.strokeStyle = 'rgba(160,190,255,.28)'; x.lineWidth = 1;
+      x.beginPath();
+      for (const d of rain){
+        d.y += d.v * 16; d.x += d.v * 2.2;
+        if (d.y > H){ d.y = -20; d.x = Math.random()*W; }
+        x.moveTo(d.x, d.y); x.lineTo(d.x - d.l*.18, d.y - d.l);
+      }
+      x.stroke();
+    }
+
+    // a shooting star now and then on a clear night
+    if (skyMode === 'clear' && !reduce){
+      if (!shoot && Math.random() < .0015) shoot = {x: Math.random()*W*.7, y: Math.random()*H*.35, life: 1};
+      if (shoot){
+        shoot.x += 7; shoot.y += 2.6; shoot.life -= .012;
+        x.globalAlpha = Math.max(shoot.life, 0);
+        x.strokeStyle = '#f3c677'; x.lineWidth = 2; x.beginPath();
+        x.moveTo(shoot.x, shoot.y); x.lineTo(shoot.x - 46, shoot.y - 17); x.stroke();
+        if (shoot.life <= 0) shoot = null;
+      }
+    }
+
+    wet += ((skyMode === 'clear' ? 0 : 1) - wet) * .02;
     x.globalAlpha = 1;
     hearts = hearts.filter(h => h.life > 0);
     for (const h of hearts){
@@ -426,9 +854,8 @@
     requestAnimationFrame(loop);
   })();
 
-  intro();
+  plan();
 })();
 </script>
-
 </body>
 </html>
