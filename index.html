@@ -190,6 +190,36 @@
     border:1px solid var(--line);border-radius:16px;touch-action:none;cursor:grab;
   }
 
+  /* today's story */
+  .told{margin-top:6px;display:grid;gap:12px}
+  .told p{
+    margin:0;color:var(--text);font-family:var(--display);
+    font-size:clamp(19px,4.8vw,23px);line-height:1.4;max-width:34ch;
+  }
+  .told p em{color:var(--rose);font-style:italic}
+  .told p b{color:var(--gold);font-weight:400;font-family:var(--body);font-size:15px;
+    letter-spacing:.06em;text-transform:uppercase}
+  .told .punch{display:block;font-size:clamp(23px,6vw,30px);color:var(--gold)}
+  .told .fresh{animation:appear .55s cubic-bezier(.2,.7,.2,1)}
+  @keyframes appear{from{opacity:.001;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .plan-list{margin:0;padding-left:1.4em}
+  .plan-list li{
+    color:var(--text);font-family:var(--display);font-size:clamp(19px,4.8vw,23px);
+    line-height:1.35;padding-left:4px;
+  }
+  .plan-list li::marker{color:var(--rose)}
+  .btn.more{
+    box-shadow:0 0 0 0 rgba(255,143,163,.55);
+    animation:beat 2.4s ease-in-out infinite;
+  }
+  @keyframes beat{
+    0%,100%{box-shadow:0 0 0 0 rgba(255,143,163,.5)}
+    50%{box-shadow:0 0 0 12px rgba(255,143,163,0)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .told .fresh,.btn.more{animation:none}
+  }
+
   /* the song */
   .song{
     margin-top:24px;padding:16px;border:1px solid var(--line);border-radius:16px;
@@ -731,11 +761,53 @@
       app.querySelectorAll('.opt').forEach(x => { x.classList.toggle('picked', x===b); x.disabled = true; });
       document.getElementById('react').textContent = f[2];
       notify('Her feeling about tomorrow night', `"${f[0]}" — ${f[1]}`, 'heartbeat');
-      setTimeout(() => finale(f[0]), 1500);
+      mood = f[0];
+      setTimeout(() => bedtime(0), 1500);
     });
   }
 
-  // ---------- screen 4: sign off ----------
+  // ---------- today's story, one piece at a time ----------
+  let mood = 'excited';
+  const BEDTIME = [
+    `Once upon a very exhausting day, there was a girl who had way too many emotions fighting for attention in her head. 😮‍💨`,
+    `She finally got home and thought, <em>"Okay… I'm officially done with today."</em>`,
+    `But somewhere across the city, a certain idiot was already making plans. 😌`,
+    `<b>His plan was very simple:</b>`,
+    `<ol class="plan-list"><li>Find the girl.</li></ol>`,
+    `<ol class="plan-list" start="2"><li>Make her laugh.</li></ol>`,
+    `<ol class="plan-list" start="3"><li>Steal at least one smile from her.</li></ol>`,
+    `<ol class="plan-list" start="4"><li>Give her a very unnecessary amount of affection.</li></ol>`,
+    `<ol class="plan-list" start="5"><li>Pretend he wasn't secretly excited all day to see her. 🥹</li></ol>`,
+    `Unfortunately, there was one tiny problem…`,
+    `He was terrible at behaving normally around her.`,
+    `So tomorrow, when he sees her, there's a very high chance he'll be smiling like an idiot, staring at her a little too much, and thinking:`,
+    `<em class="punch">"Yep. Worth waiting for." ❤️</em>`,
+    `And that, my dear, is the end of today's story.`,
+    `Tomorrow is a new episode. And I already know my favourite part. 😏❤️`,
+  ];
+  const MORE_LABELS = ['Tell me more','And then?','Go on…','Then what?','Keep going','…and?','Don\'t stop now','What happened?','Then?','No way, more','Continue','I\'m listening','Say it','Finish it','One more'];
+
+  function bedtime(i){
+    const shown = BEDTIME.slice(0, i+1);
+    const last = i === BEDTIME.length-1;
+    app.innerHTML = `<section class="screen">
+      <p class="eyebrow">Today's story · told in pieces</p>
+      <h2>A story about <em>a very long day.</em></h2>
+      <div class="told">${shown.map((p,k)=>`<p class="${k===i?'fresh':''}">${p}</p>`).join('')}</div>
+      <div class="row">
+        <button class="btn primary more" id="more">${last ? 'Take me to Saturday' : MORE_LABELS[i % MORE_LABELS.length] + ' ❤'}</button>
+      </div>
+    </section>`;
+    const btn = document.getElementById('more');
+    btn.onclick = () => {
+      if (last) return finale(mood);
+      bedtime(i+1);
+      requestAnimationFrame(() => document.getElementById('more')?.scrollIntoView({block:'end', behavior: reduce ? 'auto' : 'smooth'}));
+    };
+    if (last) notify('She read the whole bedtime story', 'All the way to "Tomorrow is a new episode."', 'crescent_moon');
+  }
+
+  // ---------- screen 5: sign off ----------
   function finale(mood){
     burst();
     app.innerHTML = `<section class="screen">
