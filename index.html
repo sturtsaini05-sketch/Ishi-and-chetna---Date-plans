@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1a1020">
-<meta property="og:title" content="Tomorrow night, Chetna">
+<meta property="og:title" content="Last night, Chetna">
 <meta property="og:description" content="The plan is locked in. Plus some pick-up lines you didn't ask for.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦄</text></svg>">
 <title>Tomorrow Night</title>
@@ -259,7 +259,150 @@
     .told .fresh,.btn.more{animation:none}
   }
 
+  .moonshot{margin-top:22px}
+  .moonshot img{max-height:70vh;object-fit:contain}
+
+  body.has-topbar main{padding-top:68px}
+
+  /* the end */
+  .theend{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:26px}
+  .theend-words{
+    font-family:var(--display);font-size:clamp(30px,8vw,42px);color:var(--text);
+    line-height:1;text-align:center;
+  }
+  .theend-words span{
+    display:block;font-size:14px;font-style:italic;color:var(--muted);
+    letter-spacing:.06em;margin-top:6px;
+  }
+  .note.ps{
+    margin:22px auto 0;max-width:420px;transform:rotate(-1.2deg);
+    animation:none;
+  }
+  .note.ps figcaption{font-size:20px;letter-spacing:.06em}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px}
+  .chip{
+    display:inline-flex;align-items:baseline;gap:7px;
+    padding:8px 15px;border-radius:999px;
+    background:var(--ink-2);border:1px solid var(--line);
+    font-size:14px;color:var(--text);
+  }
+  .chip i{font-style:normal;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+  .ask-box.sweet{
+    margin-top:22px;border-color:rgba(255,143,163,.45);
+    background:linear-gradient(180deg,#2d1b35 0%,#241531 100%);
+  }
+  .fine.centred{text-align:center;margin-top:18px}
+  .row.centre{justify-content:center}
+
+  /* the book */
+  .chapter-screen{display:flex;flex-direction:column}
+  .chap-no{
+    font-family:var(--display);font-size:15px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:2px;
+  }
+  .chap-title{
+    font-family:var(--display);font-size:clamp(30px,7.5vw,44px);line-height:1.05;
+    margin:0 0 14px;color:var(--text);
+  }
+  .chapter-screen .polaroid{
+    margin:2px auto 0;width:100%;max-width:100%;padding:12px 12px 14px;
+    transform:rotate(-1.1deg);
+  }
+  .chapter-screen .polaroid img{
+    width:100%;max-height:62vh;object-fit:contain;background:#efe6de;
+  }
+  .chapter-screen .polaroid figcaption{font-size:16px;margin-top:11px}
+  .prose{margin-top:18px;display:grid;gap:12px}
+  .prose p{
+    margin:0;color:var(--text);font-family:var(--display);
+    font-size:clamp(18px,4.6vw,21px);line-height:1.5;max-width:40ch;
+  }
+  .prose .lead::first-letter{
+    font-size:2.6em;line-height:.85;float:left;padding:8px 9px 0 0;color:var(--gold);
+  }
+  .prose .closing{font-size:15px;font-family:var(--body);color:var(--muted);margin-top:4px}
+  .prose .closing em{color:var(--rose);font-style:normal;font-weight:600}
+  @media (max-height:720px){
+    .chapter-screen .polaroid img{max-height:50vh}
+    .prose p{font-size:17px;line-height:1.45}
+  }
+
+  /* after-date album */
+  .album{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:20px}
+  .album .polaroid{margin:0;transform:rotate(-1.2deg)}
+  .album .polaroid:nth-child(even){transform:rotate(1.4deg)}
+
+  /* our song, in the background */
+  #bgm{
+    position:fixed;left:-9999px;top:0;width:280px;height:158px;
+    opacity:.01;pointer-events:none;overflow:hidden;
+  }
+  #bgm iframe{width:280px;height:158px;border:0}
+  #musicbtn{
+    position:fixed;z-index:6;left:50%;
+    top:calc(12px + env(safe-area-inset-top, 0px));
+    transform:translateX(-50%);
+    display:flex;align-items:center;gap:9px;
+    padding:11px 20px 11px 16px;border-radius:999px;cursor:pointer;
+    font:inherit;font-size:14px;font-weight:600;letter-spacing:.02em;
+    color:#2a0f1c;background:var(--rose);border:0;
+    box-shadow:0 8px 24px rgba(0,0,0,.4), 0 0 0 0 rgba(255,143,163,.55);
+    animation:tapme 2.2s ease-in-out infinite;
+  }
+  #musicbtn svg{display:block}
+  #musicbtn:focus-visible,#nowbar:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  #musicbtn.gone{
+    animation:none;opacity:0;transform:translateX(-50%) translateY(-14px) scale(.9);
+    transition:opacity .4s ease, transform .4s ease;pointer-events:none;
+  }
+  @keyframes tapme{
+    0%,100%{box-shadow:0 8px 24px rgba(0,0,0,.4), 0 0 0 0 rgba(255,143,163,.55)}
+    50%{box-shadow:0 8px 24px rgba(0,0,0,.4), 0 0 0 15px rgba(255,143,163,0)}
+  }
+
+  /* now playing */
+  #nowbar{
+    position:fixed;z-index:6;left:50%;
+    top:calc(10px + env(safe-area-inset-top, 0px));
+    transform:translateX(-50%);
+    display:flex;align-items:center;gap:10px;
+    padding:8px 16px;border-radius:999px;cursor:pointer;
+    font:inherit;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    white-space:nowrap;
+    color:var(--muted);background:rgba(38,24,46,.85);border:1px solid var(--line);
+    backdrop-filter:blur(10px);
+    animation:barIn .5s cubic-bezier(.2,.8,.25,1) .25s backwards;
+  }
+  @keyframes barIn{from{opacity:0;transform:translateX(-50%) translateY(-10px)}to{opacity:1;transform:translateX(-50%)}}
+  #nowbar.on{color:var(--text);border-color:rgba(255,143,163,.5)}
+  #nowbar .eq{display:flex;align-items:flex-end;gap:2.5px;height:14px}
+  #nowbar .eq i{width:2.5px;height:4px;border-radius:2px;background:var(--muted);display:block}
+  #nowbar.on .eq i{background:var(--rose);animation:eq .85s ease-in-out infinite}
+  #nowbar.on .eq i:nth-child(2){animation-delay:.12s;}
+  #nowbar.on .eq i:nth-child(3){animation-delay:.24s}
+  #nowbar.on .eq i:nth-child(4){animation-delay:.36s}
+  #nowbar.on .eq i:nth-child(5){animation-delay:.48s}
+  @keyframes eq{0%,100%{height:4px}50%{height:14px}}
+  #nowbar .track{display:block;width:54px;height:3px;border-radius:2px;background:var(--line);overflow:hidden}
+  #nowbar .track i{display:block;height:100%;width:34%;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--rose))}
+  #nowbar.on .track i{animation:slide 6s linear infinite}
+  @keyframes slide{from{transform:translateX(-100%)}to{transform:translateX(300%)}}
+  @media (prefers-reduced-motion:reduce){
+    #musicbtn{animation:none}
+    #nowbar .eq i,#nowbar .track i{animation:none!important}
+    #nowbar.on .eq i{height:10px}
+  }
+
   /* the song */
+  .tracks{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .track{
+    appearance:none;cursor:pointer;font:inherit;font-size:14px;font-weight:600;
+    color:var(--muted);background:transparent;border:1px solid var(--line);
+    border-radius:999px;padding:8px 16px;transition:all .2s;
+  }
+  .track:hover{border-color:var(--rose);color:var(--text)}
+  .track.on{background:var(--rose);border-color:var(--rose);color:#2a0f1c}
+  .track:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
   .song{
     margin-top:24px;padding:16px;border:1px solid var(--line);border-radius:16px;
     background:linear-gradient(180deg,#2b1a33 0%,#221530 100%);
@@ -327,6 +470,14 @@
   const NAME = 'Chetna';
   const DATE = new Date(2026, 8, 26, 18, 30);   // Saturday 26 September, 6:30pm
 
+  // the page talks about "tomorrow" until the day itself, then "tonight"
+  const _now = new Date();
+  const DAYS_TO_GO = Math.round(
+    (new Date(2026, 8, 26) - new Date(_now.getFullYear(), _now.getMonth(), _now.getDate())) / 864e5);
+  const WHEN = DAYS_TO_GO <= 0 ? 'tonight' : DAYS_TO_GO === 1 ? 'tomorrow' : 'on Saturday';
+  const WHEN_CAP = WHEN[0].toUpperCase() + WHEN.slice(1);
+  document.title = new URLSearchParams(location.search).has('before') ? 'Tonight' : 'Last Night';
+
   const TOPIC = 'chetna-date-ba0f8aef49f1';
   const notify = (title, msg, tags='sparkles') => {
     try {
@@ -337,6 +488,104 @@
     } catch(e){}
   };
   notify('Chetna opened the page again', 'She is back on the date page.', 'eyes');
+
+  // ---- our song, playing under the whole thing ----
+  const SONG_ID = 'nX01cDUmg_w';
+  let yt = null, musicReady = false, wantMusic = false, playing = false, apiPlaying = false, barEl = null;
+
+  function mountMusic(){
+    const host = document.createElement('div');
+    host.id = 'bgm';
+    host.innerHTML = '<div id="bgm-frame"></div>';
+    document.body.appendChild(host);
+
+    const btn = document.createElement('button');
+    btn.id = 'musicbtn';
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Tap to play our song');
+    btn.innerHTML = `<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+        <path d="M9 18V6l10-2v12" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="6.5" cy="18" r="2.8" fill="currentColor"/>
+        <circle cx="16.5" cy="16" r="2.8" fill="currentColor"/>
+      </svg><span>Tap me</span>`;
+    btn.onclick = () => {
+      wantMusic = true;
+      playMusic();
+      setTimeout(fallbackPlay, 1600);        // if the API is slow or blocked, just embed it
+      notify('She tapped play 🎶', 'Our song is going.', 'musical_note');
+      btn.classList.add('gone');
+      setTimeout(() => btn.remove(), 450);
+      showBar();
+    };
+    document.body.appendChild(btn);
+    document.body.classList.add('has-topbar');
+
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    tag.onerror = () => { if (wantMusic) fallbackPlay(); };
+    document.head.appendChild(tag);
+
+    window.onYouTubeIframeAPIReady = () => {
+      try {
+        yt = new YT.Player('bgm-frame', {
+          host: 'https://www.youtube.com',
+          videoId: SONG_ID,
+          playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: SONG_ID, playsinline: 1, rel: 0 },
+          events: {
+            onReady: () => { musicReady = true; if (wantMusic) playMusic(); },
+            onStateChange: e => { apiPlaying = e.data === YT.PlayerState.PLAYING; setPlaying(apiPlaying || !!document.getElementById('bgm-fallback')); },
+            onError: () => { if (wantMusic) fallbackPlay(); },
+          }
+        });
+      } catch(e){ if (wantMusic) fallbackPlay(); }
+    };
+  }
+
+  function playMusic(){
+    if (!yt || !musicReady) return;
+    try { yt.setVolume(38); yt.playVideo(); setPlaying(true); } catch(e){}
+  }
+  function pauseMusic(){
+    try { yt && yt.pauseVideo(); } catch(e){}
+    apiPlaying = false;
+    const f = document.getElementById('bgm-fallback');
+    if (f) f.remove();
+    setPlaying(false);
+  }
+  // last resort: a plain autoplaying embed, which needs no API
+  function fallbackPlay(){
+    if (apiPlaying || document.getElementById('bgm-fallback')) return;
+    const host = document.getElementById('bgm');
+    if (!host) return;
+    const f = document.createElement('iframe');
+    f.id = 'bgm-fallback';
+    f.allow = 'autoplay; encrypted-media';
+    f.src = `https://www.youtube.com/embed/${SONG_ID}?autoplay=1&loop=1&playlist=${SONG_ID}&controls=0&playsinline=1&rel=0`;
+    host.appendChild(f);
+    setPlaying(true);
+  }
+
+  // the little now-playing bar
+  function showBar(){
+    if (barEl) return;
+    barEl = document.createElement('button');
+    barEl.id = 'nowbar';
+    barEl.type = 'button';
+    barEl.setAttribute('aria-label', 'Pause or play our song');
+    barEl.innerHTML = `<span class="eq"><i></i><i></i><i></i><i></i><i></i></span>
+      <span class="lbl">our song</span>
+      <span class="track"><i></i></span>`;
+    barEl.onclick = () => playing ? pauseMusic() : (playMusic(), fallbackPlay());
+    document.body.appendChild(barEl);
+    setPlaying(true);
+  }
+  function setPlaying(on){
+    playing = on;
+    if (!barEl) return;
+    barEl.classList.toggle('on', on);
+    barEl.querySelector('.lbl').textContent = on ? 'our song' : 'paused';
+  }
 
   const U = id => `https://images.unsplash.com/${id}?w=320&h=320&fit=crop&q=70&auto=format`;
   const PIC = {
@@ -439,12 +688,12 @@
         ${bouquetSVG()}
         <figure class="note">
           <figcaption>For you</figcaption>
-          <p>Flowers can't be delivered through a screen, so these will have to do until tomorrow — when I'll be holding the real ones.</p>
+          <p>Flowers can't be delivered through a screen, so these will have to do until ${WHEN} — when I'll be holding the real ones.</p>
           <span class="sign">— Inder</span>
         </figure>
       </div>
-      <p class="eyebrow">It's official · tomorrow night</p>
-      <h1>Hi ${NAME}. <em>One sleep to go.</em></h1>
+      <p class="eyebrow">It's official · ${WHEN}</p>
+      <h1>Hi ${NAME}. ${DAYS_TO_GO <= 0 ? '<em>It\'s tonight.</em>' : '<em>One sleep to go.</em>'}</h1>
       <div class="clock" id="clock"></div>
       <p class="fine" style="margin-top:4px">until I pick you up</p>
       <div class="weather" id="weather" hidden></div>
@@ -603,7 +852,7 @@
       text:'Every bridge in the old stories has a keeper who demands a toll. This one asked her for a riddle, immediately forgot the riddle, and let her cross for nothing. He still tells people about the girl in the red dress.' },
     { img:'chetna-deer.jpg', alt:'Chetna gently patting a deer', cap:'Exhibit E: the deer who told everyone',
       title:'The Deer Who Told Everyone',
-      text:'And far away in another forest, a deer who had never let anybody near him lay down beside her as if they had always been friends. He has dined out on that story ever since. Tomorrow night, I find out how he felt.' },
+      text:'And far away in another forest, a deer who had never let anybody near him lay down beside her as if they had always been friends. He has dined out on that story ever since. ' + WHEN_CAP + ', I find out how he felt.' },
   ];
 
   function tales(i){
@@ -788,7 +1037,7 @@
         <p class="eyebrow">Time</p>
         <h2><em>${score}</em> point${score===1?'':'s'}.</h2>
         <p>${verdict} Best so far: ${best}.</p>
-        <p>You caught ${owed.length ? owed.join(', ') : 'absolutely nothing, somehow'}. I'm treating that as a list of things I owe you tomorrow, and I'm not negotiating it down.</p>
+        <p>You caught ${owed.length ? owed.join(', ') : 'absolutely nothing, somehow'}. I'm treating that as a list of things I owe you ${WHEN}, and I'm not negotiating it down.</p>
         <div class="row">
           <button class="btn primary" id="on">One more thing to ask you</button>
           <button class="btn ghost" id="replay">Play again</button>
@@ -870,7 +1119,7 @@
   function feeling(){
     app.innerHTML = `<section class="screen">
       <p class="eyebrow">One question</p>
-      <h2>How are you feeling about <em>tomorrow night?</em></h2>
+      <h2>How are you feeling about <em>${WHEN}?</em></h2>
       <p>Be honest. No wrong answers, except the cool one, which I'll see straight through.</p>
       <div class="options">
         ${FEELINGS.map((f,j)=>`<button class="opt" data-j="${j}"><span>${f[0]}</span><small>${f[1]}</small></button>`).join('')}
@@ -881,7 +1130,7 @@
       const f = FEELINGS[+b.dataset.j];
       app.querySelectorAll('.opt').forEach(x => { x.classList.toggle('picked', x===b); x.disabled = true; });
       document.getElementById('react').textContent = f[2];
-      notify('Her feeling about tomorrow night', `"${f[0]}" — ${f[1]}`, 'heartbeat');
+      notify('Her feeling about ' + WHEN, `"${f[0]}" — ${f[1]}`, 'heartbeat');
       mood = f[0];
       setTimeout(() => bedtime(0), 1500);
     });
@@ -901,10 +1150,10 @@
     `<ol class="plan-list" start="5"><li>Pretend he wasn't secretly excited all day to see her. 🥹</li></ol>`,
     `Unfortunately, there was one tiny problem…`,
     `He was terrible at behaving normally around her.`,
-    `So tomorrow, when he sees her, there's a very high chance he'll be smiling like an idiot, staring at her a little too much, and thinking:`,
+    `So ${WHEN}, when he sees her, there's a very high chance he'll be smiling like an idiot, staring at her a little too much, and thinking:`,
     `<em class="punch">"Yep. Worth waiting for." ❤️</em>`,
     `And that, my dear, is the end of today's story.`,
-    `Tomorrow is a new episode. And I already know my favourite part. 😏❤️`,
+    `${WHEN_CAP} is a new episode. And I already know my favourite part. 😏❤️`,
   ];
   const MORE_LABELS = ['Tell me more','And then?','Go on…','Then what?','Keep going','…and?','Don\'t stop now','What happened?','Then?','No way, more','Continue','I\'m listening','Say it','Finish it','One more'];
 
@@ -934,7 +1183,7 @@
     app.innerHTML = `<section class="screen">
       <p class="eyebrow">That's all of it</p>
       <h1>See you at <em>6:30.</em></h1>
-      <p>You're ${mood.toLowerCase()}, I'm somewhere past that. Tomorrow: one surprise drink, one table I've been quietly smug about, and the whole city lit up underneath us.</p>
+      <p>You're ${mood.toLowerCase()}, I'm somewhere past that. ${WHEN_CAP}: one surprise drink, one table I've been quietly smug about, and the whole city lit up underneath us.</p>
       <div class="clock" id="clock"></div>
       <figure class="polaroid">
         <img src="tale-bridge.jpg" alt="Chetna in a red floral dress on a wooden bridge by a lake">
@@ -947,16 +1196,6 @@
           <button class="btn primary" id="sendsong">Send</button>
         </div>
         <p class="fine" id="songdone" hidden>Got it. It's going on the playlist tonight.</p>
-      </div>
-      <div class="song">
-        <p class="eyebrow" style="margin-bottom:8px">And one last thing · press play</p>
-        <div class="video">
-          <iframe src="https://www.youtube-nocookie.com/embed/syFZfO_wfMQ?rel=0"
-            title="Night Changes — One Direction"
-            allow="accelerometer; encrypted-media; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <p class="fine" style="margin-top:10px"><b style="color:var(--text)">Night Changes</b> — One Direction. Everything changes at night, apparently. Let's test that theory on Saturday.</p>
       </div>
       <p class="fine">Bring nothing else. I've got the rest.</p>
       <div class="row">
@@ -1187,7 +1426,230 @@
     requestAnimationFrame(loop);
   })();
 
-  plan();
+  // ================= after the date =================
+  // Sunday 27 September, 8am — the page becomes something else.
+  const AFTER_FROM = new Date(2026, 8, 27, 8, 0);
+  const qs = new URLSearchParams(location.search);
+  const AFTER = !qs.has('before');   // the night has happened — this is the after page
+
+  // photos from the night — add the files beside index.html and fill in src
+  const CHAPTERS = [
+    { n:'One', t:'Oakleigh', img:'night-flowers.jpg',
+      alt:'Chetna in the car with pink flowers',
+      cap:'Flowers first. Oakleigh, and the drive after.',
+      p:[`There is a particular kind of nervous that only turns up when you are parked in Oakleigh with flowers on the passenger seat, wondering whether you picked the right ones.`,
+         `She came out, and the nerves went the way nerves always go when someone smiles at you properly — quickly, and without much of a fight. She held them the whole drive.`] },
+
+    { n:'Two', t:'Footscray', img:'night-food.jpg',
+      alt:'Dinner at Vegie Bar',
+      cap:'Vegie Bar, Footscray. All green, all yours.',
+      p:[`Vegie Bar, Footscray. A green room of a restaurant where, for once, every single thing on the menu belonged to her.`,
+         `She ordered the way people order when they know exactly what they like. I agreed with all of it and quietly pretended it had been my idea.`] },
+
+    { n:'Three', t:'Her Hands', img:'night-hands.jpg',
+      alt:'Holding hands across the table',
+      cap:'The nails. I noticed in about four seconds.',
+      p:[`Somewhere between the first plate and the second I noticed her nails — new, and very good, and obviously the work of an afternoon.`,
+         `I reached across the table for her hand and lost the end of whatever sentence I was in the middle of. I suspect this will keep happening.`] },
+
+    { n:'Four', t:'The Lookout', img:'night-lookout.jpg',
+      alt:'The city from the lookout',
+      cap:'The lookout. Half the city, just sitting there.',
+      p:[`We drove up to where the city goes quiet and lies down flat beneath you, all of it glowing along the edge of the water like something left on by accident.`,
+         `The wind came up off the bay and had a proper go at her hair. It lost.`] },
+
+    { n:'Five', t:'The Fairy', img:'night-fairy.jpg',
+      alt:'A blurred photo of Chetna at the lookout',
+      cap:'Tried to photograph you. Caught a fairy instead.',
+      p:[`I tried to take her photograph up there. The shutter was slow, or my hands were, or the night simply refused to hold still for us.`,
+         `What came out is a blur of a girl in the dark, half-lit, caught mid-step — and it is the best picture I have of the entire evening. She looks like something out of a story nobody has got around to writing down.`] },
+
+    { n:'Six', t:'The Room Where We Met', img:'night-shisha.jpg',
+      alt:'Madusa lounge',
+      cap:'Madusa. The same room where we first met.',
+      p:[`After the lookout we went for shisha. Not just anywhere: that room. The same low blue light, the same corner, the same place I first spoke to her when I had no idea what I was walking into.`,
+         `I didn't make much of it at the time. I'll make something of it now — sitting in that room a second time, with the whole story in between, was the best part of my week.`] },
+
+    { n:'Seven', t:'The Dog', img:'night-dog.jpg',
+      alt:'The little white toy dog she gave me',
+      cap:'The dog. Currently on my lap. Not moving.',
+      p:[`Then she handed me a dog. Small, white, extremely fluffy, and not real — although nobody appears to have told the dog that.`,
+         `It licks your hand. It licks your foot. It is deeply committed to the performance. It has been on my lap since I got home and shows no intention of leaving.`] },
+
+    { n:'Eight', t:'Tail Lights', img:'night-drive.jpg',
+      alt:'Following her car home on the highway',
+      cap:'Tail lights all the way home.',
+      p:[`She'd had a couple, so I drove behind her the whole way home — two red lights in front of me, one set of streetlights handing us to the next.`,
+         `It is a small thing, following someone home. It is also the only thing I wanted to be doing.`] },
+
+    { n:'Nine', t:'Staying', img:'night-home.jpg',
+      alt:'Chetna on her street with the flowers',
+      cap:'Her street. Flowers still in her hand.',
+      p:[`She got out on her own street, flowers still in her hand, standing under the light the way people stand when they are pretending they are not tired.`,
+         `And then I didn't leave. We stayed at hers — that pink bed, the lamp off, the whole long day finally allowed to stop. I slept better than I have in years, and I don't think the mattress had much to do with it.`,
+         `In the morning I went back over the evening in the order it had happened. Which is more or less how this book came about.`] },
+  ];
+
+  const AFTER_Q = [
+    { key:'moment', eyebrow:'Question one', q:'Best bit of <em>last night?</em>', opts:[
+      ['Dinner at Vegie Bar','the long, easy part','You ordered better than I did.'],
+      ['The lookout','the city and the wind','Cold. Correct. Doing it again.'],
+      ['Shisha, where we met','full circle','That one got me too.'],
+      ['The drives','Oakleigh to Footscray and back','Quietly my favourite as well.'],
+    ]},
+    { key:'rating', eyebrow:'Question two', q:'Rate the night, <em>honestly.</em>', opts:[
+      ['10/10','no notes',"Same. Obviously same."],
+      ['9/10','points off for the wind',"Fair. I will have a word with the sky."],
+      ['11/10','breaking the scale',"Now you are just showing off. Keep going."],
+      ['Not telling you',"you will get a big head","Too late for that, honestly."],
+    ]},
+    { key:'next', eyebrow:'Last one', q:'So… <em>what are we doing next?</em>', opts:[
+      ['Beach day','sun, sand, questionable swimming','Packing the towels already.'],
+      ['Movie night in','couch, snacks, no plans','Low effort, high reward. My favourite genre.'],
+      ['A road trip','pick a direction and drive',"Dangerous. I am in."],
+      ['Dinner, I cook this time','brave of you to allow this',"Bold of me to offer. It is happening."],
+    ]},
+  ];
+  const answers2 = {};
+
+  function sinceLine(){
+    const ms = Date.now() - DATE.getTime();
+    if (ms < 36e5) return 'the morning after';
+    const h = Math.floor(ms/36e5), d = Math.floor(ms/864e5);
+    return d >= 1 ? `${d} day${d===1?'':'s'} since I picked you up` : `${h} hour${h===1?'':'s'} since I picked you up`;
+  }
+
+  function aHome(){
+    app.innerHTML = `<section class="screen">
+      <div class="gift">
+        ${bouquetSVG()}
+        <figure class="note">
+          <figcaption>Thank you</figcaption>
+          <p>You got the real ones last night. These are just so there's something pretty while you read.</p>
+          <span class="sign">— Inder</span>
+        </figure>
+      </div>
+      <p class="eyebrow">${sinceLine()}</p>
+      <h1>So. <em>Last night.</em></h1>
+      <p>I wrote last night down. Nine short chapters, one photograph each, and three questions at the end. Take your time with it.</p>
+      <div class="row"><button class="btn primary more" id="go2">Open the book</button></div>
+    </section>`;
+    document.getElementById('go2').onclick = () => aChapter(0);
+    notify('She opened the after-date page 💌', 'The surprise landed.', 'love_letter');
+  }
+
+  function aChapter(i){
+    const c = CHAPTERS[i], last = i === CHAPTERS.length - 1;
+    flyBy(CREATURES[i % CREATURES.length]);
+    app.innerHTML = `<section class="screen chapter-screen">
+      <p class="eyebrow">Last night · a short book</p>
+      <div class="chap-no">Chapter ${c.n}</div>
+      <h2 class="chap-title">${c.t}</h2>
+      <figure class="polaroid">
+        <img src="${c.img}" alt="${c.alt}" loading="${i ? 'lazy' : 'eager'}">
+        <figcaption>${c.cap}</figcaption>
+      </figure>
+      <div class="prose">${c.p.map((t,k)=>`<p${k?'':' class="lead"'}>${t}</p>`).join('')}</div>
+      <div class="pages">${CHAPTERS.map((_,k)=>`<i class="${k<=i?'on':''}"></i>`).join('')}</div>
+      <div class="row">
+        <button class="btn primary more" id="turn">${last ? 'Three questions for you' : 'Turn the page'}</button>
+        ${last || i > 5 ? '' : '<button class="btn ghost" id="skipc">Skip ahead</button>'}
+      </div>
+    </section>`;
+    document.getElementById('turn').onclick = () => {
+      if (last) return aQuestion(0);
+      aChapter(i+1);
+      scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    };
+    const sk = document.getElementById('skipc');
+    if (sk) sk.onclick = () => aQuestion(0);
+    if (last) notify('She read the whole book', 'All nine chapters, right to Home Safe.', 'books');
+  }
+
+  function aQuestion(i){
+    const q = AFTER_Q[i];
+    if (!q) return aEnd();
+    flyBy(CREATURES[i % CREATURES.length]);
+    app.innerHTML = `<section class="screen">
+      <p class="eyebrow">${q.eyebrow}</p>
+      <h2>${q.q}</h2>
+      <div class="options">
+        ${q.opts.map((o,j)=>`<button class="opt" data-j="${j}"><span>${o[0]}</span><small>${o[1]}</small></button>`).join('')}
+      </div>
+      <div class="reaction" id="react"></div>
+    </section>`;
+    app.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+      const o = q.opts[+b.dataset.j];
+      answers2[q.key] = o[0];
+      app.querySelectorAll('.opt').forEach(x => { x.classList.toggle('picked', x===b); x.disabled = true; });
+      document.getElementById('react').textContent = o[2];
+      notify('After the date — ' + q.key, q.q.replace(/<[^>]+>/g,'') + ' → ' + o[0], 'sparkling_heart');
+      setTimeout(() => aQuestion(i+1), 1400);
+    });
+  }
+
+  function aEnd(){
+    burst();
+    const chip = (label, val) => val ? `<span class="chip"><i>${label}</i>${val}</span>` : '';
+    app.innerHTML = `<section class="screen chapter-screen">
+      <p class="eyebrow">Epilogue</p>
+      <h2 class="chap-title">The Moon</h2>
+      <figure class="polaroid">
+        <img src="night-moon.jpg" alt="Chetna looking up at the moon" loading="lazy">
+        <figcaption>You, your hair, and the moon.</figcaption>
+      </figure>
+      <div class="prose">
+        <p class="lead">And then, right at the end of it, she looked up.</p>
+        <p>I took one last picture — her hair, the clouds, the whole sky doing an impression of something she had already outshone. It was a beautiful night, and it was beautiful because of her.</p>
+      </div>
+
+      <div class="theend">
+        <svg viewBox="0 0 120 24" width="130" height="26" aria-hidden="true">
+          <path d="M4 12h34" stroke="#f3c677" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M82 12h34" stroke="#f3c677" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M60 7.5c-3-4-9-1-9 3.2 0 4 5.4 7 9 9.3 3.6-2.3 9-5.3 9-9.3 0-4.2-6-7.2-9-3.2z" fill="#ff8fa3"/>
+        </svg>
+        <div class="theend-words">The End<span>— for now —</span></div>
+      </div>
+
+      <figure class="note ps">
+        <figcaption>P.S.</figcaption>
+        <p>The dog is sitting on my lap as I write this, licking my hand like it means it. It sends its regards, and so do I.</p>
+        <span class="sign">— Inder</span>
+      </figure>
+
+      <div class="chips">
+        ${chip('best bit', answers2.moment)}
+        ${chip('rating', answers2.rating)}
+        ${chip('next', answers2.next)}
+      </div>
+
+      <div class="ask-box sweet">
+        <label for="reply"><b>Now your turn.</b> One line, anything at all — it lands straight on my phone.</label>
+        <div class="field">
+          <input id="reply" type="text" placeholder="Write me back…" autocomplete="off">
+          <button class="btn primary" id="sendreply">Send ♥</button>
+        </div>
+        <p class="fine" id="replydone" hidden>Got it. I'll be reading that about forty times.</p>
+      </div>
+
+      <p class="fine centred">${sinceLine().replace(/^the morning after$/, 'The morning after')} · Chapter Two is already being planned 😏</p>
+      <div class="row centre"><button class="btn ghost" id="reread">Read it again from the start</button></div>
+    </section>`;
+    document.getElementById('reread').onclick = () => aChapter(0);
+    const r = document.getElementById('reply'), sd = document.getElementById('sendreply'), d = document.getElementById('replydone');
+    const send = () => {
+      const v = r.value.trim(); if (!v) { r.focus(); return; }
+      notify('💌 Chetna wrote back', v, 'love_letter');
+      r.value = ''; r.disabled = true; sd.disabled = true; sd.textContent = 'Sent ♥'; d.hidden = false; burst();
+    };
+    sd.onclick = send;
+    r.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
+    notify('She finished the book', `Best bit: ${answers2.moment || '-'} · Rating: ${answers2.rating || '-'} · Next: ${answers2.next || '-'}`, 'tada');
+  }
+
+  mountMusic();
+  (AFTER ? aHome : plan)();
 })();
 </script>
 </body>
